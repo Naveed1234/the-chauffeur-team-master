@@ -1,0 +1,40 @@
+﻿body {
+}
+
+.fixed_header {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+
+
+    .fixed_header tbody {
+        display: block;
+       
+        overflow: auto;
+    }
+
+
+
+
+    .fixed_header thead tr {
+        display: block;
+    }
+
+    .fixed_header thead {
+        background-color:blue;
+        color: #fff;
+    }
+
+    .fixed_header th{
+        padding: 2px;
+        text-align: left;
+        width: 135px;
+    }
+
+.fixed_header td {
+        padding:2px;
+        width: 135px;
+        text-align:center
+    }

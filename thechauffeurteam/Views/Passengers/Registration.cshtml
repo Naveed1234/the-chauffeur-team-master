@@ -1,0 +1,120 @@
+﻿@model thechauffeurteam.Models.ViewModel.PassengerRegistration
+@{
+    //Layout = null;
+}
+
+ <div class="col-md-12 driverReg" style="width:100%;background-color:white">
+        <div class="justify-content-center" style="margin-top:5%; padding-bottom:80px;">
+            <div class="register-form driverAndPassengerRegisterForm">
+                <div class="row">
+
+                    <div class="col-md-12 " style="text-align :center;background-color:#1853a1; color:white;font-family:Arial;padding:20px;border-radius:5px 5px 0 0">
+                        <h3 style="color:#fff;" class="text-uppercase">PASSENGER  REGISTRATION</h3>
+                    </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-12" style="background-color:#E9E9EB;padding-bottom:50px;border-bottom-left-radius:5px;border-bottom-right-radius:5px">
+                        <br><br>
+                        
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div style="background-color:white;border-top:2px solid red;padding:15px;border-radius:5px;padding-bottom:50px;width:100%;margin-top:20px">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h5>LOGINS ACCOUNT DETAIL</h5><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-sm-12" for="userfName"><b>First Name</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.UserFirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                                            @Html.ValidationMessageFor(model => model.UserFirstName, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-sm-12" for="userlName"><b>Last Name</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.UserLastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                                            @Html.ValidationMessageFor(model => model.UserLastName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-12" for="mobile"><b>Mobile</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.UserPhNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile" } })
+                                            @Html.ValidationMessageFor(model => model.UserPhNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-sm-12" for="userEmail"><b>Email</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", @id = "pemailId", placeholder = "Email", onchange = "UserCheck()" } })
+                                            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                                          
+                                            <p  class="" id="Status" />
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-sm-12" for="userPassword"><b>Password</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-sm-12" for="userConfPassword"><b>Confirm Password</b></label>
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.ConformPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Re-Enter Password" } })
+                                            @Html.ValidationMessageFor(model => model.ConformPassword, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row justify-content-center" style="justify-content:center; align-items:center; margin-top:50px">
+                                <button type="submit" style="background-color:#1853a1;color:white;" class="btn btn-lg text-uppercase col-md-6 justify-content-center">Register</button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@section scripts{
+    
+ <script>
+    function UserCheck() {
+        $("#Status").html("Checking...");
+        $.post("@Url.Action("CheckEmailAvailability", "Passengers")",
+            {
+                useremail: $("#pemailId").val()
+            },
+        function (data) {
+            if (data == 0) {
+                $("#Status").html('<font color="Green"></font>');
+                $("#pemailId").css("border-color", "Green");
+
+            }
+            else {
+                $("#Status").html('<font color="Red">This email is already register.</font>');
+                $("#pemailId").css("border-color", "Red");
+                $("#pemailId").val("");
+            }
+        });
+    }
+ </script>
+    
+    
+    
+    }
+
+

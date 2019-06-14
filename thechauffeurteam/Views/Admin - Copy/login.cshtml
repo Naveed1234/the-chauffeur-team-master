@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center " style="padding-top:50px">
+    <div class="col-md-6 p-5">
+        <form class="center-block form col-md-12" action="/admin/Login" method="post" style="padding:12px; border-radius:15px; background:#fff;box-shadow:2px 10px  20px 5px #1853a1;">
+            <center><label style="font-size:2rem;color:#1853a1">Login as Admin</label></center><br />
+            <div class="form-group col-md-12">
+
+                <h6 class="text-danger">@TempData["Errormsg"]</h6>
+
+            </div>
+            <div class="row" style="color:#1853a1;">
+                <div class="form-group col-md-12">
+                    <label for="email"><b>Email</b></label>
+                    @*<input type="email" class="form-control col-md-12" id="email" placeholder="Email">*@
+                    @Html.TextBox("pEmail", "", new { @class = "form-control col-md-12", @placeholder = "Enter Your Email" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" style="color:#1853a1;">
+                    <label for="password"><b>Password</b></label>
+                    @*<input type="password" class="form-control col-md-12" id="password" placeholder="password">*@
+                    @Html.Password("pPassword", "", new { @class = "form-control col-md-12", @placeholder = "Enter Your Password" })
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+            <br />
+            <div class="row" style="justify-content:center">
+                <div class="col-md-4">
+                    <button type="submit" style="background:#1853a1;color:white;" class="btn col-md-12 btn-hover-group">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

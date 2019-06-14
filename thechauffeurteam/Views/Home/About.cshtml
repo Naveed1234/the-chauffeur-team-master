@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+
+
+    int UserSessionId= 0;
+
+    if (Session["user"] != null)
+    {
+        UserSessionId = (int)Session["user"];
+    }
+
+
+
+}
+
+
+<div style="margin:50px;">
+
+    <h1>   @UserSessionId  </h1>
+
+</div>
+
+<a href="#show" class="button">Login</a>
+
+<div id="show" style="display:none;">
+    <h2>about us page here</h2>
+
+    <p>lelper lsdpfew ;sdjfpw ldsl f lsdjf l sfljd ls fjsldjf sdlfjldsjf
+    sdlfsdjlf lsdjf sdl ljdf lk lwrm lrm lrm aldjf onl dfjow lsf sl</p>
+</div>
+
+@section scripts{
+    
+   <script>
+       $(document).ready(function () {
+
+           $("a.button").fancybox();
+
+           var seessinId = @UserSessionId;
+
+           console.log(seessinId);
+
+
+       });
+
+    </script>
+    
+    
+    }

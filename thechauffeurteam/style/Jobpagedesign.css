@@ -1,0 +1,37 @@
+﻿body {
+}
+
+.fixed_header1 {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+
+
+    .fixed_header1 tbody {
+        display: block;
+        overflow: auto;
+    }
+
+
+
+
+    .fixed_header1 thead tr {
+        display: block;
+    }
+
+    .fixed_header1 thead {
+        background-color: lightblue;
+        color: #fff;
+    }
+
+    .fixed_header1 th {
+        text-align: center;
+        width: 135px;
+    }
+
+    .fixed_header1 td {
+        /*text-align: center;
+        width: 135px;*/
+    }

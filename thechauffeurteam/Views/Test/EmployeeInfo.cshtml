@@ -1,0 +1,14 @@
+﻿@model IEnumerable<thechauffeurteam.Models.job>
+@{
+    ViewBag.Title = "EmployeeInfo";
+}
+<div id="id1">
+    <h4 style=" text-align:center;border-bottom:1px solid #808080">EmployeeInfo</h4>
+    @foreach (var item in Model)
+    {
+        <p><label>Name : </label> @item.id</p>
+        <p><label>Email : </label> @item.PassengerName</p>
+        <p><label>Phone : </label> @item.PassengerPhone</p>
+        <p><label>Experience : </label> @item.Price</p>
+    }
+</div>

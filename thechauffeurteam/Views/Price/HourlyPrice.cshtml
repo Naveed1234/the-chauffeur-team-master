@@ -1,0 +1,84 @@
+﻿@model IEnumerable<thechauffeurteam.Models.HourlyPrice>
+@{
+    ViewBag.Title = "PriceTable";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <div class="row mt-5">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Hourly Prices </h3>
+                        </div>
+                        <div class="col text-right">
+                            @if (ViewBag.isAddDisable == 100000)
+                            {
+                                <a href="~/Price/AddHourlyPriceValue" class="btn btn-sm btn-primary disabled">Add</a>
+                            }
+                            else
+                            {<a href="~/Price/AddHourlyPriceValue" class="btn btn-sm btn-primary">Add</a>}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!--  table -->
+                    <table class="table table-bordered text-center  table-flush table-striped">
+                        <thead class="thead-light ">
+                            <tr>
+                                <th scope="col"><b>Hours Range</b></th>
+                                <th scope="col"><b>S-Class</b></th>
+                                <th scope="col"><b>V-Class</b></th>
+                                <th scope="col"><b>E-Class</b></th>
+                                <th scope="col"><b></b></th>
+                            </tr>
+                            @foreach (var value in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => value.HourFrom)&nbsp;&nbsp;-&nbsp;&nbsp;@Html.DisplayFor(modelItem => value.HourTo)</td>
+                                    <td><b>£</b>&nbsp; @Html.DisplayFor(modelItem => value.SclassPerHour)</td>
+                                    <td><b>£</b>&nbsp; @Html.DisplayFor(modelItem => value.VclassPerHour)</td>
+                                    <td><b>£</b>&nbsp; @Html.DisplayFor(modelItem => value.EclassPerHour)</td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" href="~/Price/EdithourlyPrice/@value.Id">Edit</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+

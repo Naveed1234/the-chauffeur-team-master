@@ -1,0 +1,153 @@
+﻿@model thechauffeurteam.Models.HourlyPrice
+
+@{
+    ViewBag.Title = "PriceTable";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    int[] HourToVal = ViewBag.HourTo;
+}
+
+
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+
+        </div>
+    </div>
+</div>
+<!-- Editable table -->
+
+<div class="container-fluid mt--7">
+    <div class="row mt-5">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Hourly Price Value</h3>
+                        </div>
+                        <div class="col text-right">
+                            @*<a href="#!" class="btn btn-sm btn-primary">See all</a>*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body thead-light">
+
+                    @*<<<<<<<<*@
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row justify-content-center">
+
+
+                            <div class="col-md-9">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>Hours Range</b></label>
+                                            <div class="col-sm-12">
+                                                <label class="form-control" type="text" value="@ViewBag.HourFrom">@ViewBag.HourFrom</label>
+                                                <input type="hidden" id="HourFrom" name="HourFrom" value="@ViewBag.HourFrom" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                <select id="HourTo" name="HourTo" class="form-control">
+                                                    @for (int i = 0; i < HourToVal.Length; i++)
+                                                    {
+                                                        if (@HourToVal[i] != 100000)
+                                                        {
+                                                            <option value="@HourToVal[i]">@HourToVal[i]</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="100000">...</option>
+                                                        }
+
+
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                  
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>Price Per Hour </b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.SclassPerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "S-Class per Hour" } })
+                                                @Html.ValidationMessageFor(model => model.SclassPerHour, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.VclassPerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "V-Class per Hour" } })
+                                                @Html.ValidationMessageFor(model => model.VclassPerHour, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.EclassPerHour, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Class per Hour" } })
+                                                @Html.ValidationMessageFor(model => model.EclassPerHour, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <button class="col-md-1 btn btn-primary" type="submit"> SAVE</button>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+

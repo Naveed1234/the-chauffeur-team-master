@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Savoy Minicabs</title>
+    <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon" />
+    @*<link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />*@
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+
+
+    <link href="~/wow/animate.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css" />
+
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" type="text/css" media="all">
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
+
+
+
+
+    <link rel="stylesheet" href="~/css/fontawesome-all.css">
+
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //web-fonts -->
+
+
+</head>
+
+<body>
+    
+    <!-- Social Icons -->
+    <ul id="social_side_links">
+        <li><a style="background-color: #3c5a96;" href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f">  </i></a></li>
+        <li><a style="background-color: #1dadeb;" href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        <li><a style="background-color: #1178b3;" href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+
+        <li><a style="background-color: #000000" href="https://plus.google.com/" target="_blank"><i class="fab fa-google-plus-g"></i> </a>  </li>
+
+
+        <li><a style="background-color: #ff0000" href="https://www.pinterest.com/" target="_blank">  <i class="fab fa-pinterest-p"></i> </a>  </li>
+
+
+
+    </ul>
+
+
+    <ul id="social_side_right" title="Click here for contact with me for job ">
+        <li><a style="background-color: #3c5a96;" href="/Home/Contact" target="_blank"> <i class="far fa-handshake"></i> </a></li>
+
+    </ul>
+
+    <div id="">
+        <div class="" >
+            <nav class="navbar  navbar-expand-md  navbar-dark  p-0 " style="background:#fff;border-bottom:5px solid #264145;border-top :5px solid #264145;">
+                <a class="navbar-brand" href="#"> <img src="~/images/logo.png" class="logo" /></a>
+                <button class="navbar-toggler nvtgle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation ">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse  collapse" id="navbarSupportedContent">
+                    <ul class="navbar navbar-nav nvleft" id="navItem">
+                        <li class="nav-item   tab ml-lg-5">
+                            <a class="nav-link" href="\Home\Index">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item nml tab">
+                            <a class="nav-link" href="@Url.Action("Services","Home")">Services</a>
+                        </li>
+                        <li class="nav-item nml tab">
+                            <a class="nav-link" href="\Home\Fleet">Our Fleet</a>
+
+                        </li>
+
+
+
+
+                        <li class="nav-item nml tab">
+                            <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
+                        </li>
+                        @if (Session["user"] == null && Session["Dirveruser"] == null)
+                        {
+                            <li class="nav-item dropdown nml" >
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" @*aria-haspopup="false" aria-expanded="true"*@>
+                                    Register
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#264145;">
+
+                                    <a class="dropdown-item" href="@Url.Action("Registration", "Passengers")">Register as a Passsenger</a>
+                                    <a class="dropdown-item" href="@Url.Action("Register", "Drivers")">Register as a Driver </a>
+
+                                </div>
+
+                            </li>
+                        }
+                        else if (Session["user"] != null)
+                        {
+
+
+                            <li class="nav-item nml tab">
+                                <a class="nav-link" href="#"> @Session["userName"]</a>
+                            </li>
+                        }
+
+                        else
+                        {
+
+                            <li class="nav-item nml tab">
+                                <a class="nav-link" href="#"> @Session["Dirveruser"]</a>
+                            </li>
+                        }
+
+
+
+                        @if (Session["user"] == null && Session["driverId"] == null)
+                        {
+
+                            <li class="nav-item nml tab">
+                                <a class="nav-link" href="@Url.Action("Login","Drivers")">Login</a>
+                            </li>
+                        }
+                        else if (Session["user"] != null)
+                        {
+                            <li class="nav-item nml tab">
+                                <a class="nav-link" href="@Url.Action("LogOut","Passengers")">Log Out</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item nml tab">
+                                <a class="nav-link" href="@Url.Action("LogOut","Drivers")">Log Out</a>
+                            </li>
+                        }
+                    </ul>
+                    @*<div class="ml-auto faH " style="color:#0026ff">
+
+
+
+
+
+                            <i class="fas fa-search mr-sm-3" style="cursor:pointer;"></i>
+                        </div>*@
+
+
+                    <div class="ml-auto mr-md-3 tpPhone">
+                        <h5  style="color:#264145;">
+                            <i class="fas fa-phone"></i> 020 8672 0000 </br>
+                        </h5>
+
+                    </div>
+
+                </div>
+
+
+
+            </nav>
+        </div>
+    </div>
+
+    <!--//navbar-->
+
+    <div>
+        <!--main body div-->
+        @RenderBody()
+
+        <!--footer-->
+        <footer class="py-sm-5 py-4 px-md-5 px-3">
+
+            <div class="container-fluid pt-lg-5">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
+                        <h3 class="mb-sm-5 mb-4 mt-sm-0 mt-4">About Company</h3>
+                        <p>
+                            Savoy Minicabs are committed to offering a service that
+                            meets and exceeds our customers expectations. Operating 24 hours a day 365 days a year we aim to provide
+                            the ultimate travelling experience, by ensuring a prompt, efficient and reliable service.
+                        </p>
+
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
+                        <h3 class="mb-sm-5 mb-4">Locate Us</h3>
+                        <ul class="w3ls-footer-bottom-list">
+                            <li> <span class="fas fa-map-marker"></span>179 Tooting High St,Tooting </br>London SW17 0SZ</li>
+                            <li> <span class="fas fa-envelope"></span> <a href="mailto:info@savoyminicabs.co.uk"> </a>Info@savoyminicabs.co.uk </li>
+                            <li> <span class="fas fa-phone"></span>020 8672 0000</li>
+                            <li> <span class="fas fa-phone"></span>020 8682 1122 </li>
+                            <li> <span class="fas fa-phone"></span>020 8682 2000 </li>
+                            @*<li> <span class="fas fa-fax"></span> +112 367 896 2449 </li>*@
+
+                            @*<li> <span class="fas fa-clock"></span> Office Time  : 8:00 a.m - 6:00 p.m</li>*@
+                        </ul>
+                    </div>
+
+                    <!-- subscribe -->
+                    <div class="col-lg-3 col-sm-6 subscribe-main footer-grid-agileits-w3ls text-left">
+                        <h3 class="mb-sm-5 mb-4">Newsletter</h3>
+                        <div class="subscribe-main text-left">
+                            <div class="subscribe-form">
+                                <form action="#" method="post" class="subscribe_form">
+                                    <input class="form-control" type="email" placeholder="Enter Your Email..." required="">
+                                    <button type="submit" class="btn1 btn-primary submit"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- //subscribe -->
+
+                    </div>
+                    <!-- //subscribe -->
+                    <div class="col-lg-3 col-sm-6  footer-grid-agileits-w3ls">
+                        <div class="footer-social">
+                            <div class="copyrighttop">
+                                <h3 class="mb-sm-5 mb-5 md-5 ">Stay In Touch</h3>
+                                <ul>
+                                    <li class="mr-1">
+                                        <a class="facebook" href="#">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li class="mr-1">
+                                        <a class="facebook" href="#">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="mr-1">
+                                        <a class="facebook" href="#">
+                                            <i class="fab fa-google-plus-g"></i>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- copyright -->
+                <div class="footer-cpy text-center pt-sm-5 mt-sm-5 mt-4 pt-3">
+                    <div class="w3layouts-agile-copyrightbottom">
+                        <p>
+                            © 2019 Savoy Minicabs All Rights Reserved | Design by
+                            <a href="Itlogi.solutions.com">IT LOGI. </a>
+                        </p>
+
+                    </div>
+                </div>
+                <!-- //copyright -->
+            </div>
+        </footer>
+        <!-- //footer -->
+    </div> <!-- //main body div-->
+    @*<script src="~/Scripts/alertify.min.js"></script>*@
+
+    <script src="~/wow/wow.min.js"></script>
+    <script>
+        wow = new WOW(
+            {
+                boxClass: 'wow',      // default
+                animateClass: 'animated', // default
+                offset: 0,          // default
+                mobile: true,       // default
+                live: true        // default
+            }
+        )
+        new WOW().init();
+    </script>
+
+
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script>
+
+        $(document).ready(function () {
+        function checkPosition() {
+            if (window.matchMedia('(max-width: 1080px)').matches) {
+
+               
+            } else {
+                //...
+            }
+        }
+
+
+            if (window.matchMedia('(max-width: 1080px)').matches) {
+
+
+                //$('.navbar-collapse').click(function (e) {
+
+                //    $('.navbar-collaps').toggle();
+                //    //$('.navbar-collapse').collapse('toggle');
+                //});
+
+                //$('.navbar-dark .navbar-toggler').show();
+
+
+                //$('.navbar-dark .navbar-toggler').click(function () {
+
+
+                //    $('.navbar-collaps').toggle();
+                //});
+
+
+                //$('.navbar-collap>li>a').on('click', function () {
+                //    $('.navbar-collapse').collapse('hide');
+                //});
+
+            }
+
+
+
+
+        });
+
+    </script>
+
+    <script src="~/Scripts/select2.min.js"></script>
+
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

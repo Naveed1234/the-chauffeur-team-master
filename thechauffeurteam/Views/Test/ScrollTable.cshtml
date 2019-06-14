@@ -1,0 +1,132 @@
+﻿@{
+    Layout = null;
+}
+
+<style>
+    #contextMenu {
+        position: absolute;
+        display: none;
+    }
+
+    .wrap {
+        width: 90%;
+        display: block;
+        
+        margin: 0 auto;
+    }
+
+    table {
+        border: 2px solid rgba(221, 221, 221, 1);
+    }
+
+    tr:nth-child(even) {
+        background: #F5F5F5
+    }
+
+    tr {
+        position: relative;
+    }
+
+        tr:hover {
+            background: #c9e8f7;
+            position: relative;
+        }
+</style>
+
+<div class="wrap">
+
+    <div>
+        <h1>Custom Right-Click Interface Menus</h1>
+    </div>
+
+
+    <table id="mt" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Ty</td>
+                <td>Stelmach</td>
+
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Andy</td>
+                <td>Hawkins</td>
+
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Lawrence</td>
+                <td>Bird</td>
+
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Sally</td>
+                <td>Saran</td>
+
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Heather</td>
+                <td>Long</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="contextMenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li>
+                <a tabindex="-1" href="#">Action 1</a>
+            </li>
+            <li>
+                <a tabindex="-1" href="#">Action 2</a>
+            </li>
+            <li>
+                <a tabindex="-1" href="#">Some More Actions</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a tabindex="-1" href="#">Final Action</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        var $contextMenu = $("#contextMenu");
+
+        $("body").on("contextmenu", "table tr", function (e) {
+            $contextMenu.css({
+                "background-color": "yellow", "font-size": "100%",
+                display: "block",
+               
+                left: e.pageX,
+                top: e.pageY
+            });
+            return false;
+        });
+
+        $('html').click(function () {
+            $contextMenu.hide();
+        });
+
+    });
+</script>
+

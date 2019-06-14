@@ -1,0 +1,48 @@
+﻿
+<div style="margin:200px;">
+    <h1> ajax call</h1>
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.TextBox("textAmount", 0)
+        <button id="btnDoubleValue"> Double Value </button>
+
+        <div id="lblMessage"></div>
+    }
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#btnDoubleValue').on('click', function () {
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Home/doubValue',
+                    data: { 'value': $('#textAmount').val() },
+                    dataType: 'json',
+                    cache: false,
+                    success: function (data) {
+                        $('#textAmount').val(data.doubleValue);
+                        console.log("your data submited successfull ");
+                    },
+                    error: function () {
+
+                        $('#lblMessage').html('there was an error');
+                    },
+                });
+
+                return false;
+
+            });
+
+        });
+
+    </script>
+
+    }

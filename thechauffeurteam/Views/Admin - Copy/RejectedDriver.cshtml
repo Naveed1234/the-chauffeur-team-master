@@ -1,0 +1,196 @@
+﻿
+@model IEnumerable<thechauffeurteam.Models.Driver>
+
+@{
+    ViewBag.Title = "Drivers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/NewDriver">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">new</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.NewSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                            <i class="fas fa-percent"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/ApprovedDriver">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Approved</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.ApprovedSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                            <i class="fas fa-chart-pie"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/RejectedDriver">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Rejected</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.RejectedSum </span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/Driver">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">All</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.AllSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="row mt-5">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Drivers</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Phone No</th>
+                                <th scope="col">Fax</th>
+                                <th scope="col">Postcode</th>
+                                <th scope="col">Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rec in Model)
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        @Html.DisplayFor(modelItem => rec.DriverName)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => rec.DriverEmail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => rec.phNo)
+                                    </td>
+                                    <td>
+                                        Fax
+                                        @Html.DisplayFor(modelItem => rec.Fax)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => rec.PostCode)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Detail", "DriverDetail", "Admin", new { id = rec.Id }, new { @class = "btn btn-outline-info btn-sm" })
+                                        @*<a class="btn btn-outline-info btn-sm" href="~/driver/detail" role="button">Detail<i class="fas fa-arrow-right ml-2"></i></a>*@
+                                    </td>
+                                    @*<td>
+                                            <a class="btn btn-outline-primary btn-sm" href="~/driver/PcoDetail" role="button">PCO Detail<i class="fas fa-arrow-right ml-2"></i></a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-default btn-sm" href="~/driver/vehicleDetail" role="button">Vehicle Detail<i class="fas fa-arrow-right ml-2"></i></a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success btn-sm" href="~/driver/userLogin" role="button">User Login<i class="fas fa-arrow-right ml-2"></i></a>
+                                            @*<button class="btn btn-outline-warning btn-sm">Login Detail</button>
+                                        </td>*@
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+

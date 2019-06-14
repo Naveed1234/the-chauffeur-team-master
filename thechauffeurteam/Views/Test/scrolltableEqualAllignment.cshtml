@@ -1,0 +1,375 @@
+﻿@{ 
+    Layout = null;
+}
+
+<html>
+<head>
+
+    <title>Test Sticky Table Header</title>
+    <style>
+
+        #body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 52vh;
+            width: 100%;
+            font-family: sans-serif;
+            background: #007180;
+        }
+
+        .text-box {
+            width: 1400px;
+            height: 400px;
+            overflow-y: scroll;
+            background: #fff;
+            box-shadow: 0px 10px 100px rgba(0,0,0,0);
+        }
+
+        table {
+            width: 100%;
+        }
+
+            table th td {
+                border: 1px solid #005277;
+                border-collapse: collapse;
+                text-align: center;
+            }
+
+            table td {
+                font-size: 10px;
+            }
+
+        th {
+            position: sticky;
+            top: 0;
+            width: 200px;
+            background: blue;
+            color: #fff;
+        }
+
+        tr th:nth-child() {
+            width: 60px;
+            text-align: center;
+            background-color: #03707d;
+        }
+
+        tr td:nth-child() {
+            background: #00bc64;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-box">
+        <table cellpadding="6">
+            <thead>
+                <tr>
+
+                    <th>JobId</th>
+                    <th>Time/Date</th>
+                    <th>PickUp</th>
+                    <th>Drop Off</th>
+                    <th>Price</th>
+                    <th>Via</th>
+
+                    <th>vehicle</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>JobType</th>
+                    <th>AC.No</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+                <tr>
+                    <td>123</td>
+                    <td>9:30 AM 05/04/2019</td>
+                    <td id="td">Lahoresd</td>
+                    <td id="td">Narowal</td>
+                    <td id="td">Lahore</td>
+                    <td>5 <i class="fas fa-pound-sign"></i></td>
+
+                    <td>Mehran</td>
+                    <td>MNA</td>
+                    <td>03085488943</td>
+                    <td>Cash</td>
+                    <td id="td">43502</td>
+                    <td>...</td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

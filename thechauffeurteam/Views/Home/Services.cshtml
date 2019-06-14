@@ -1,0 +1,258 @@
+﻿
+@{
+    ViewBag.Title = "Services";
+}
+
+<head>
+    <style>
+        .ac-container {
+            margin: 0px auto 28px auto;
+            text-align: left;
+            width: 99%;
+        }
+
+            .ac-container label {
+                padding: 10px 20px;
+                position: relative;
+                z-index: 20;
+                display: block;
+                height: 50px;
+                cursor: pointer;
+                color: #264145;
+                line-height: 33px;
+                font-size: 16px;
+                background: #fff;
+                border: 1px solid #264145;
+                font-weight: 600;
+            }
+
+                .ac-container label:hover {
+                    background: #264145;
+                    color: white;
+                }
+
+
+            .ac-container input:checked + label,
+            .ac-container input:checked + label:hover {
+                background: #264145;
+                color: #fff;
+            }
+
+                .ac-container label:hover:after,
+                .ac-container input:checked + label:hover:after {
+                    content: '';
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    right: 13px;
+                    top: 7px;
+                    background: transparent url(../images/arrow_down.png) no-repeat center center;
+                }
+
+
+                .ac-container input:checked + label:hover:after {
+                    background-image: url(../images/arrow_up.png);
+                }
+
+            .ac-container input {
+                display: none;
+            }
+
+
+            .ac-container article {
+                background: rgba(255, 255, 255, 0.5);
+                margin-top: -1px;
+                overflow: hidden;
+                height: 0px;
+                position: relative;
+                z-index: 10;
+                -webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                -moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                -o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+            }
+
+                .ac-container article p {
+                    line-height: 27px;
+                    font-size: 15px;
+                    padding: 31px 20px;
+                    background-color: rgba(555,555,555,0.7);
+                    color: #264145;
+                }
+
+            .ac-container input:checked ~ article {
+                -webkit-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                -moz-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                -o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
+            }
+
+
+                .ac-container input:checked ~ article.ac-small {
+                    height: 140px;
+                }
+
+                .ac-container input:checked ~ article.ac-medium {
+                    height: 180px;
+                }
+
+                .ac-container input:checked ~ article.ac-large {
+                    height: 230px;
+                }
+    </style>
+</head>
+
+
+
+<div style="background-image:url('../../images/bgdriver.jpg');background-size:cover; border-top:5px solid #264145;background-attachment:fixed;">
+
+
+
+    <div class="row mt-3">
+
+
+       
+        <div class="col-9" style="margin-left:10%;">
+            <div style="margin-top:70px;" class="text-center">
+
+                <h2 style="background:#264145; border:5px solid #fff; color:white; font-weight:800; padding:20px;">OUR TAILORED SERVICES </h2>
+
+
+            </div>
+
+            <section class="ac-container">
+                <div>
+                    <input id="ac-1" name="accordion-1" type="checkbox" />
+                    <label for="ac-1"> <i class="fas fa-angle-double-right p-2"></i> Airport Transfers</label>
+                    <article class="ac-small">
+                        <p>
+                            The Chauffeur Team specialises in UK airport transfers covering Gatwick airport, Heathrow airport, Luton airport,
+                            Stansted airport and London City Airport We makes it a priority to ensure you receive a smooth and reliable service
+                            to and from the airport during your airport transfer in and around London. Your flight information will be monitored
+                            in advance using the official British Airports Authority flight information to ensure our driver is on time and waiting
+                            for you when you get out. For your journey to the airport, our drivers will meet you at your chosen location and take you to your destination.
+                            Our drivers will be aware of your full journey in advance and will be waiting inside the airport for you.
+
+                        </p>
+
+                    </article>
+                </div>
+                <div>
+                    <input id="ac-2" name="accordion-1" type="checkbox" />
+                    <label for="ac-2"> <i class="fas fa-angle-double-right p-2"></i> Minicab Hourly Rate</label>
+                    <article class="ac-medium">
+                        <p>Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price. </p>
+                    </article>
+                </div>
+
+               
+
+                <div>
+                    <input id="ac-5" name="accordion-1" type="checkbox" />
+                    <label for="ac-5"> <i class="fas fa-angle-double-right p-2"></i>Personal Concierge</label>
+                    <article class="ac-large">
+                        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+                    </article>
+                </div>
+
+                <div>
+                    <input id="ac-6" name="accordion-1" type="checkbox" />
+                    <label for="ac-6"> <i class="fas fa-angle-double-right p-2"></i>Property Management including Security</label>
+                    <article class="ac-large">
+                        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+                    </article>
+                </div>
+
+
+                <div>
+                    <input id="ac-7" name="accordion-1" type="checkbox" />
+                    <label for="ac-7"> <i class="fas fa-angle-double-right p-2"></i>Weddings   </label>
+                    <article class="ac-large">
+                        <p>
+                            The Chauffeur Team offers its luxury chauffeur driven cars for weddings all around London and the UK. Through our years of experience as one of the leading wedding companies in the wedding car hire industry we understand the importance of the big day. Our wedding car hire package includes complimentary wedding car ribbons and to make your wedding car extra special we offer a range of wedding ribbon colours to suit your clour scheme on the big day.
+                            The Chauffeur Team  wedding car services includes a suited, courteous specialist wedding chauffeur driver  who will be on hand to assist you and relieve stress on the big day during your transportation to your selected venue. The Chauffeur Team  chauffeur driven wedding services can arrange to have your chosen vehicle decorated in flowers or ribbons of your choice to tie in with the wedding colour theme on your wedding.
+                        </p>
+                    </article>
+                </div>
+
+
+                <div>
+                    <input id="ac-8" name="accordion-1" type="checkbox" />
+                    <label for="ac-8"> <i class="fas fa-angle-double-right p-2"></i>Tours in London </label>
+                    <article class="ac-large">
+                        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+                    </article>
+                </div>
+
+
+                <div>
+                    <input id="ac-9" name="accordion-1" type="checkbox" />
+                    <label for="ac-9"> <i class="fas fa-angle-double-right p-2"></i>Tours in UK   </label>
+                    <article class="ac-large">
+                        <p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+                    </article>
+                </div>
+
+
+           
+
+
+            </section>
+
+        </div>
+
+    </div>
+    <div class="">
+        <div class="py-5" style="background:#fff;">
+            <div class="row top mt-5">
+                <div class="col-lg-4 mb-lg-0 mb-4 address-grid">
+                    <div class="row address-info">
+                        <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="col-lg-9 col-sm-10 address-right text-left">
+                            <h6> For further assistance Contact  </h6>
+                            <p style="color:#264145;">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-lg-0 mb-4 address-grid">
+                    <div class="row address-info">
+                        <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
+                            <i class="fas fa-envelope-open"></i>
+                        </div>
+                        <div class="col-lg-9 col-sm-10 address-right text-left">
+                            <h6>Email</h6>
+                            <p style="color:#264145;font-weight:500">
+                                <a href="mailto:info@savoyminicabs.co.uk"> </a>Info@savoyminicabs.co.uk </li>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 address-grid">
+                    <div class="row address-info">
+                        <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="col-lg-9 col-sm-10 address-right text-left">
+                            <h6>Direct On</h6>
+                            <p style="color:#264145; font-weight:500;">020 8672 0000</p>
+                            @*<p>Fax : 112 367 896 2449</p>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--main div-->
+</div>
+
+
+@section scripts{
+
+
+
+}

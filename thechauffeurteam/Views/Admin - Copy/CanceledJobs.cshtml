@@ -1,0 +1,491 @@
+﻿@model IEnumerable<thechauffeurteam.Models.job>
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-4 pt-md-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/index">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">new</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.NewJobSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                            <i class="fas fa-percent"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>*@
+                                    <span class="text-nowrap text-info">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/ActiveJobs">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Active</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.ActiveJobSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                            <i class="fas fa-chart-pie"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/completedJobs">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Finished</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.FinishJobSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <a href="~/admin/CanceledJobs">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Canceled</h5>
+                                        <span class="h2 font-weight-bold mb-0">@ViewBag.CancelJobSum</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-muted text-sm">
+                                    @*<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>*@
+                                    <span class="text-nowrap">See more detail</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid mt--7">
+
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Jobs</h3>
+                </div>
+                <div class="table-responsive" style="min-height:400px;max-height:700px">
+                    <table class="table align-items-center table-flush" style="height:1000px">
+                        <thead class="thead-dark">
+                            <tr class="text-light px-1">
+                                <th scope="col" class="text-light px-1 ml-0 px-0 text-center">Status</th>
+                                <th scope="col" class="text-light px-0 mx-0 text-center">Time</th>
+                                <th scope="col" class="text-light px-0 text-center">Pick Up</th>
+                                <th scope="col" class="text-light px-0 text-center">Drop Off</th>
+                                <th scope="col" class="text-light px-0 text-center">Miles</th>
+                                <th scope="col" class="text-light px-0 text-center">Price</th>
+                                <th scope="col" class="text-light px-0 text-center">Phone#</th>
+                                <th scope="col" class="text-light px-0 text-center">Name</th>
+                                <th scope="col" class="text-light px-0 text-center">Driver</th>
+
+                                <th class=" px-0"></th>
+                            </tr>
+
+                            @foreach (var value in Model)
+                            {
+
+
+                                <tr class=" px-1" style="">
+
+                                    @switch (value.status)
+                                    {
+
+                                        case 1:
+
+                                            {
+                                                <td class="py-0 my-0 px-1 mr-0" style="max-width:50px;">
+                                                    <span class="badge badge-dot">
+                                                        <i class="bg-warning"></i><text class="text-warning">Active</text>
+                                                    </span>
+                                                </td>
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                <td class="py-0 my-0  px-1" style="max-width:50px">
+                                                    <span class="badge badge-dot mr-4">
+                                                        <i class="bg-success"></i> <text class="text-success">Finished</text>
+                                                    </span>
+                                                </td>
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                <td class="py-0 my-0 px-1" style="max-width:50px">
+                                                    <span class="badge badge-dot mr-4">
+                                                        <i class="bg-danger"></i> <text class="text-danger">Canceled</text>
+                                                    </span>
+                                                </td>
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                <td class="py-1 my-0 px-2" style="max-width:50px">
+                                                    <span class="badge badge-dot mr-4">
+                                                        <i class="bg-info"></i><text class="text-info">New</text>
+                                                    </span>
+                                                </td>
+                                                break;
+                                            }
+                                    }
+
+                                    <td scope="col" class="py-1 my-0 pr-0 mr-0" style="overflow:hidden;max-width:155px">@value.dateAndTime</td>
+                                    <td scope="col" class="py-1 my-0 ml-0 px-0 " style="overflow:hidden;max-width:200px">@value.pickUp</td>
+                                    <td scope="col" class="py-1 my-0 pr-0 ml-1" style="overflow:hidden;max-width:200px">@value.DropUP</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.Mile</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">£&nbsp; @value.Price</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.PassengerPhone</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.PassengerName</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.DriverId</td>
+                                    <td class="text-right py-1 my-0 px-0">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                @{
+                                                    var id = @value.id;
+                                                }
+                                                <a class="dropdown-item" href="" onclick="jobInfo(@id)" data-toggle="modal" data-target="#jobModal">Info</a>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @Html.Partial("_JobModalinfo")
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+
+
+
+
+
+
+<div onload="ModalLoad()" class="modal fade" id="cancelConfr" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-notify" role="document" style="width:1000px">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">Alert</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-danger">
+                Do you realy want to cancel this Job?
+                <input type="hidden" id="cancelJobId" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" onclick="cancelJob()" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Central Modal Medium Success -->
+<div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit iusto nulla aperiam blanditiis
+                        ad consequatur in dolores culpa, dignissimos, eius non possimus fugiat. Esse ratione fuga, enim,
+                        ab officiis totam.
+                    </p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <input type="button" class="btn btn-success">Get it now <i class="fa fa-diamond ml-1 text-white"></i></input>
+                <input type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">No, thanks</input>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Success-->
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function jobInfo(Id) {
+            //alert("success" + Id)
+
+
+             $.ajax({
+                type: "POST",
+                 url: '@Url.Action("JobInfo", "Admin")',
+                 data: { id: Id },
+                 dataType: "json",
+
+                 success: function (success) {
+
+                     //alert('pick Up :'+success.pickUp);
+                     var txt = $("#jobId").val();
+                     $("#jobId").html(txt + success.jb.id);
+                     $("#jid").val(success.jb.id);
+                     $("#pickUpAddress").val(success.jb.pickUp);
+                     $("#dropOffAddress").val(success.jb.DropUP);
+                     $("#distance").val(success.jb.Mile);
+                     $("#price").val(success.jb.Price);
+
+                     $("#carType").select(success.jb.CarType);
+                     var dAndT = "" + success.jb.dateAndTime;
+
+
+                     $("#time").val(dAndT.substring(0, 10));
+                     $("#date").val(dAndT.substring(11));
+                     $("#driverMessage").val(success.jb.DriverMessage);
+
+                     $("#name").val(success.pass.UserFirstName);
+                     $("#phone").val(success.pass.UserPhNo);
+
+
+
+                     var myOptions = success.drivers;
+                     //var mySelect = ;
+                     var select = $("#drivers");
+                     // alert("length " + success.drivers.length);
+                     $("#drivers").children().remove();
+                     select.append($("<option>").val(0).html("Select Driver"));
+
+                     $(success.drivers).each(function (index, item) {
+                         if (item.DriverId != null) {
+                             select.append($("<option>").val(item.Id).html(item.DriverId));
+                         }
+                         else {
+                             select.append($("<option>").val(item.Id).html(item.DriverName));
+                         }
+
+                     });
+
+                    console.log(success);
+
+                 },
+                 error: function (e, text, string) {
+                    alert(e.message + text + string);
+                    console.log(e);
+                 }
+
+            });
+
+        };
+
+        function setCancelJobId(JID) {
+
+            $("#cancelJobId").val(JID)
+        }
+        function modalJobCancel() {
+            $("#cancelJobId").val($("#jid").val());
+            //cancelJob();
+        }
+        function cancelJob()
+        {
+            var jobId = $("#cancelJobId").val();
+            $("#cancelJobId").val("");
+            $.ajax({
+                type: "POST",
+                 url: '@Url.Action("CancelJob", "Admin")',
+                 data: { JobId: jobId },
+                 dataType: "json",
+
+                success: function (message) {
+                    if (message == 1) {
+                        alert("Job is canceled Successfully.");
+                    }
+                    else {
+                        alert("Sorry, Job cannot cancel");
+                    }
+
+                 },
+                error: function (e, text, string) {
+                    alert("Sorry, Job cannot cancel");
+                 }
+            });
+
+        }
+
+        function editJob() {
+            $(".jobEditGroup").removeAttr("readonly");
+            $(".saveButton").removeAttr("hidden");
+        }
+
+        function onShowModal() {
+            alert("ook");
+            $(".jobEditGroup").addBack("readonly");
+            $(".saveButton").addBack("hidden");
+        }
+
+        function allocateJob() {
+            $(".DriverDropdown").removeAttr("hidden");
+        }
+
+        function DirectAllocateJob(Id) {
+            jobInfo(Id);
+            $(".DriverDropdown").removeAttr("hidden");
+
+        }
+
+
+
+        function allocateJobToDriver() {
+
+            var driverId = $("#drivers").val();
+
+            if ($("#drivers").val() == 0) {
+                $("#drivers").addClass("border-danger");
+                alert("not selected");
+            }
+            else {
+                //alert("" + $("#drivers").val());
+
+                //var job =
+                var txt = $("#jobId").val();
+
+                //var jobID =$("#jobId").html(txt + success.jb.id);
+                var jobID = $("#jid").val();
+
+                var pickUpAddress = $("#pickUpAddress").val();
+                var dropOffAddress = $("#dropOffAddress").val();
+                var distance = $("#distance").val();
+                var price = $("#price").val();
+
+                //$("#carType").select(success.CarType
+                //var dAndT = "" + success.jb.dateAndTime;
+
+
+                var time = $("#time").val() + " " + $("#date").val();
+                var driverMessage = $("#driverMessage").val();
+
+                var name = $("#name").val();
+                var phone = $("#phone").val();
+                //alert("" + driverId);
+                //alert("ALLOCATE" + jobID + " " + time + " " + phone + " " + distance + " " + price);
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AllocateJob", "Admin")',
+                    data: {
+
+                        Id: jobID,
+                        DriverId: driverId,
+                        PhoneNo: phone,
+                        PName: name,
+                        Time: time,
+                        DriverMessage: driverMessage,
+                        Distance: distance,
+                        Price: price
+                    },
+                    dataType: "json",
+
+                    success: function (success) {
+
+                        alert("success" + success)
+
+                    },
+                    error: function (e, text, string) {
+                        alert(e.message + text + string);
+                        console.log(e);
+                    }
+                });
+            }
+
+        }
+
+
+    </script>
+}
+

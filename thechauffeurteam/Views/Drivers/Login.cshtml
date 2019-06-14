@@ -1,0 +1,92 @@
+﻿@model thechauffeurteam.Models.Passenger
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row justify-content-center " style="background-image:url('../../images/bgform.jpg'); background-repeat:no-repeat;background-size:cover;">
+    <div class="col-md-10">
+
+        <div class="row " style="margin-bottom:10%; margin-top:5%;">
+
+            <div class="col-lg-6 col-md-12 col-12 p-5" style="border-right:1px solid #5A84B7;">
+                <form class="center-block form col-md-12" action="/Passengers/Loged" method="post" style="padding:12px; border-radius:15px; background:#fff;box-shadow:2px 10px  20px 5px #1853a1;">
+                   
+                    <center><label class="loginheading" >Login as Passenger</label></center><br />
+
+                     <div class="form-group col-md-12">
+                            
+                         <h6 class="text-danger">@TempData["Errormsg"]</h6>
+                           
+                        </div>
+                    <div class="row"  style="color:#1853a1;">
+                        <div class="form-group col-md-12">
+                            <label for="email" ><b>Email</b></label>
+                            @*<input type="email" class="form-control col-md-12" id="email" placeholder="Email">*@
+                            @Html.TextBox("pEmail","", new { @class = "form-control col-md-12", @placeholder = "Enter Your Email" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12" style="color:#1853a1;">
+                            <label for="password"><b>Password</b></label>
+                            @*<input type="password" class="form-control col-md-12" id="password" placeholder="password">*@
+                            @Html.Password("pPassword","", new { @class = "form-control col-md-12", @placeholder = "Enter Your Password" })
+                        </div>
+                    </div>
+                    <div class="row">
+                       
+                    </div>
+                    <br />
+                    <div class="row" style="justify-content:center">
+                        <div class="col-md-4">
+                            <button type="submit" style="background:#1853a1;color:white;" class="btn col-md-12 p-3 btn-hover-group">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-6  col-md-12 col-12 p-5">
+                <form class="center-block form col-md-12" action="/Drivers/Loged" method="post" style="padding:12px; border-radius:15px; background:#fff;background:#fff;box-shadow:2px 10px  20px 5px #1853a1;">
+                    <center><label class="loginheading">Login as Driver</label></center><br />
+                    <div class="form-group col-md-12">
+
+                        <h6 class="text-danger">@TempData["DErrormsg"]</h6>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12" style="color:#1853a1;">
+                            <label for="email"><b>Email</b></label>
+                            <input type="email" name="demail" class="form-control col-md-12" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12" style="color:#1853a1;">
+                            <label for="password"><b>Password</b></label>
+                            <input name="dPassword" type="password" class="form-control col-md-12" id="password" placeholder="password">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" style="justify-content:center">
+                        <div class="col-md-4">
+                            <button type="submit" style="background:#1853a1;color:white;" class="btn  col-md-12 p-3 btn-hover-group">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    
+
+</div>
+
+
+@section scripts{
+    
+
+    
+    
+    
+    
+    }

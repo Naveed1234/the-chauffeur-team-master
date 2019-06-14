@@ -1,0 +1,141 @@
+﻿@model IEnumerable<thechauffeurteam.Models.job>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.passenger.UserFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateAndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pickUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PdoorNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DropUP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DdoorNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attribute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.passenger.UserFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassengerPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateAndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pickUp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PdoorNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DropUP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DdoorNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attribute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

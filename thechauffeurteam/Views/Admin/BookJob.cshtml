@@ -1,0 +1,1731 @@
+﻿@model IEnumerable<thechauffeurteam.Models.job>
+@{
+    ViewBag.Title = "BookJob";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    // int UserSessionId = 0;
+}
+<br /><br />
+<head>
+    @*<link href="~/css/style.css" rel="stylesheet" />*@
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
+    <link href="~/style/DriverStyle.css" rel="stylesheet" />
+
+
+    <style>
+
+        #body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 38vh;
+            width: 150vh;
+            font-family: sans-serif;
+            /*background: #007180;*/
+        }
+
+        .text-box {
+            height: 260px;
+            overflow-y: scroll;
+            background: #fff;
+            box-shadow: 0px 10px 100px rgba(0,0,0,0);
+        }
+
+        table {
+            width: 100%;
+        }
+
+            table th td {
+                border: 1px solid #005277;
+                border-collapse: collapse;
+                text-align: center;
+            }
+
+            table td {
+                width: 200px;
+                font-size: 11px;
+            }
+
+
+
+        th {
+            width: 400px;
+            position: sticky;
+            top: 0;
+            /*width:290px;*/
+            background: blue;
+            color: #fff;
+        }
+
+        tr th:nth-child() {
+            width: 60px;
+            text-align: center;
+            background-color: #03707d;
+        }
+
+        tr td:nth-child() {
+            background: #00bc64;
+            color: #fff;
+        }
+    </style>
+    <style>
+        /*#contextMenu {
+            position: absolute;
+            display: none;
+        }
+
+        .wrap {
+            width: 30%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        table {
+            border: 2px solid rgba(221, 221, 221, 1);
+        }
+
+        tr:nth-child(even) {
+            background: #F5F5F5
+        }
+
+        tr {
+            position: relative;
+        }
+
+            tr:hover {
+                background: #c9e8f7;
+                position: relative;
+            }*/
+    </style>
+
+    <style>
+
+        #dritble {
+            height: 280px
+        }
+
+        #table tr th {
+            width: 110px;
+        }
+
+        #table tr td {
+            width: 170px;
+            font-size: 11px;
+        }
+
+        #td {
+            max-width: 10px;
+            padding: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .form-group {
+            padding: 0px;
+            margin-top: 0px;
+            height: 30px;
+        }
+
+        .bt {
+            font-size: 12px;
+            width: 154px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+            margin-left: 4px;
+        }
+
+        #formMain2 {
+            height: 315px;
+            background-color: #fff !important;
+            border: 5px solid rgba(555,555,555,0.6);
+        }
+
+        #refreshForm2 {
+            position: absolute;
+            left: 99%;
+            top: 35%;
+            cursor: pointer;
+            /*color: #fff !important;*/
+            color: greenyellow;
+        }
+
+
+
+
+        #formHead .active, .dhf:hover {
+            background-color: #264145;
+            color: white;
+        }
+
+
+        .formBody {
+            height: 260px;
+        }
+
+        .dhf {
+            /*background-color: #212529;*/
+            color: white;
+            width: 52.2%;
+            height: 40px;
+            text-align: center;
+            padding-top: 6px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #264145;
+            color: #264145;
+        }
+
+            #formHead .active, .dhf:hover {
+                background-color: blue;
+                color: white;
+            }
+
+        .PicUpTime {
+            color: #264145;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .timefield {
+            width: 130px;
+        }
+
+        .Hourfield {
+            width: 50%;
+        }
+
+        #HourMain {
+            display: none;
+        }
+
+        #flateRates {
+            display: none;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 40px !important;
+        }
+
+
+        .pricebadge {
+            display: none;
+            background: #264145 !important;
+            color: #fff !important;
+            text-align: center;
+        }
+
+        .wickedpicker {
+            z-index: 111;
+        }
+
+        .wickedpicker__title {
+            background: #264145 !important;
+            color: #fff !important;
+        }
+
+        .returnDateTime {
+            background: #264145;
+            color: white;
+            padding: 3px;
+            border-radius: 10px;
+            margin-bottom: 3px;
+        }
+
+
+        /*datepicker styling*/
+
+        .ui-datepicker {
+            background-color: #fff;
+            border: 1px solid #66AFE9;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(102,175,233,.6);
+            display: none;
+            margin-top: 4px;
+            padding: 2px;
+            width: 240px;
+        }
+
+            .ui-datepicker a,
+            .ui-datepicker a:hover {
+                text-decoration: none;
+            }
+
+                .ui-datepicker a:hover,
+                .ui-datepicker td:hover a {
+                    color: #2A6496;
+                    -webkit-transition: color 0.1s ease-in-out;
+                    -moz-transition: color 0.1s ease-in-out;
+                    -o-transition: color 0.1s ease-in-out;
+                    transition: color 0.1s ease-in-out;
+                }
+
+            .ui-datepicker .ui-datepicker-header {
+                margin-bottom: 4px;
+                text-align: center;
+            }
+
+            .ui-datepicker .ui-datepicker-title {
+                font-weight: 100;
+            }
+
+            .ui-datepicker .ui-datepicker-prev,
+            .ui-datepicker .ui-datepicker-next {
+                cursor: default;
+                font-family: 'Glyphicons Halflings';
+                -webkit-font-smoothing: antialiased;
+                font-style: normal;
+                font-weight: normal;
+                height: 20px;
+                line-height: 1;
+                margin-top: 2px;
+                width: 30px;
+            }
+
+            .ui-datepicker .ui-datepicker-prev {
+                float: left;
+                text-align: left;
+            }
+
+            .ui-datepicker .ui-datepicker-next {
+                float: right;
+                text-align: right;
+            }
+
+            .ui-datepicker .ui-datepicker-prev:before {
+                content: "\e079";
+            }
+
+            .ui-datepicker .ui-datepicker-next:before {
+                content: "\e080";
+            }
+
+            .ui-datepicker .ui-icon {
+                display: none;
+            }
+
+            .ui-datepicker .ui-datepicker-calendar {
+                table-layout: fixed;
+                width: 100%;
+            }
+
+                .ui-datepicker .ui-datepicker-calendar th,
+                .ui-datepicker .ui-datepicker-calendar td {
+                    width: 100%;
+                    text-align: center;
+                    padding: 2px 0;
+                }
+
+                .ui-datepicker .ui-datepicker-calendar td {
+                    border-radius: 4px;
+                    -webkit-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    -moz-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    -o-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                }
+
+                    .ui-datepicker .ui-datepicker-calendar td:hover {
+                        background-color: #eee;
+                        cursor: pointer;
+                    }
+
+                    .ui-datepicker .ui-datepicker-calendar td a {
+                        text-decoration: none;
+                    }
+
+            .ui-datepicker .ui-datepicker-current-day {
+                background-color: #4289cc;
+            }
+
+                .ui-datepicker .ui-datepicker-current-day a {
+                    color: #fff
+                }
+
+            .ui-datepicker .ui-datepicker-calendar .ui-datepicker-unselectable:hover {
+                background-color: #fff;
+                cursor: default;
+            }
+
+
+        /*datepicker styling*/
+    </style>
+</head>
+
+
+
+
+<div class="container-fluid bg-gradient-gray">
+
+
+
+
+    <div class="row mt-4">
+
+        <div class="col-md-8 driverReg mt-2 ml--2">
+            <div class="row justify-content-center">
+                <div class="register-form">
+                    @*<div class="row">
+                            @*<div class="col-md-12" style="text-align :center;background-color:#264145;font-family:Arial;padding:20px;border-radius:5px 5px 0 0">
+                                <h3 style="color:#fff;">Book Now</h3>
+                            </div>
+
+                        </div>*@
+
+                    @*<div id="refreshForm2" title="Reset ">
+                            <span class="badge badge-info bad"> <i class="fas fa-sync-alt"></i></span>
+                        </div>*@
+                    <div id="formMain2" class="">
+
+                        <div id="formHead" class="d-flex flex-row">
+                            <div class="dhf active distance"> Distance</div>
+
+                            <div class="dhf flateRate">Airports</div>
+                            <div class="dhf hourly">Hourly </div>
+                        </div>
+                        <div class="formBody p-2 ">
+                            <form method="post" id="distanceform" action="jobBooking/SaveJobAjx">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="PassengerName" placeholder="Passenger Name" style="width:285px" id="Pname" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="PassengerPhone" placeholder="Passenger Phone Number" style="margin-right:16px;width:285px" id="Phone" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <div class="form-group pr-1">
+                                            <input id="datepicker" name="date" type="text" class="form-control" placeholder="Pick-up Date" value="" style="width:128px;margin-right:14px">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group pl-1">
+                                            <input type="text" id="timepicker" name="time" class="timepicker form-control ml--3" placeholder="Pick-up Time" value="" style="margin-right:30px;width:120px;">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div id="flateRates">
+                                    <div class="form-group">
+                                        @Html.DropDownList("pickUpPostcode", ViewBag.pickUpPostcode as SelectList, "Select Pick Up Post Code", new { @class = "form-control", @id = "PostCodeSelect2", @style = "width: 100%" })
+                                        <p class="text-danger" id="postcodeError"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.DropDownList("dropOffPostcode", ViewBag.dropOffPostcode as SelectList, "Select Drop Off Post Code", new { @class = "form-control", @id = "PostCode2Select3", @style = "width: 100%" })
+                                        <p class="text-danger" id="postcodeError2"></p>
+                                    </div>
+                                </div> <!--flate rates-->
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <div class="form-group pick">
+                                            <input type="hidden" id="searchTextField" placeholder="enter the informtion">
+                                            <input type="text" id="from_places" placeholder="Pick Up Address" class="form-control" style="width:285px" />
+                                            <input type="hidden" id="origin" name="origin" />
+                                            <input type="hidden" name="jobType" id="jobType" />
+                                            <input type="hidden" name="passengerId" id="passengerId" />
+                                            <input type="hidden" name="selectedcar" id="selectedcar" />
+
+                                            <p class="text-danger" id="inputError1"> </p>
+                                        </div>
+                                        <input type="hidden" name="postcode_1" id="postcode_1" />
+                                        <input type="hidden" name="postcode_2" id="postcode_2" />
+                                        <div id="HourMain">
+
+                                            <div class="d-flex flex-row">
+                                                <div class="p-md-2"> <p class="PicUpTime">Trip Duration</p></div>
+                                                <div class="form-group Hourfield">
+                                                    <select class="form-control" id="hours" name="hours">
+                                                        <option value="">Select Hour(s)</option>
+                                                        <option value="01">01 Hour(s)</option>
+                                                        <option value="02">02 Hour(s)</option>
+                                                        <option value="03">03 Hour(s)</option>
+                                                        <option value="04">04 Hour(s)</option>
+                                                        <option value="05">05 Hour(s)</option>
+                                                        <option value="06">06 Hour(s)</option>
+                                                        <option value="07">07 Hour(s)</option>
+                                                        <option value="08">08 Hour(s)</option>
+                                                        <option value="09">09 Hour(s)</option>
+                                                        <option value="10">10 Hour(s)</option>
+                                                        <option value="11">11 Hour(s)</option>
+                                                        <option value="12">12 Hour(s)</option>
+                                                        <option value="13">13 Hour(s)</option>
+                                                        <option value="14">14 Hour(s)</option>
+                                                        <option value="15">15 Hour(s)</option>
+                                                        <option value="16">16 Hour(s)</option>
+                                                        <option value="17">17 Hour(s)</option>
+                                                        <option value="18">18 Hour(s)</option>
+                                                        <option value="19">19 Hour(s)</option>
+                                                        <option value="20">20 Hour(s) </option>
+                                                        <option value="20">20 Hour(s)</option>
+                                                        <option value="20">20 Hour(s)</option>
+                                                        <option value="21">21 Hour(s)</option>
+                                                        <option value="22">22 Hour(s)</option>
+                                                        <option value="23">23 Hour(s)</option>
+                                                        <option value="00">00 Hour(s)</option>
+                                                    </select>
+                                                    <p class="text-danger" id="hourError"></p>
+                                                </div>
+
+                                            </div>
+                                        </div><!--hour rates-->
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="doorno" placeholder="Door Number" class="form-control" id="doorno" style="width:136px" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group Drop">
+                                            <input type="text" id="to_places" name="dropOff" placeholder="Drop Off Address" class="form-control ml--1" style="width:272px" />
+                                            <input id="destination" name="destination" type="hidden" />
+                                            <p class="text-danger" id="inputError2"> </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="doorno1" placeholder="Door Number" class="form-control ml--3" id="doorno1" style="width:125px;" />
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select class="form-control" id="cartype" name="cartype" style="width:283px">
+                                                <option value="">Car Type</option>
+                                                <option value="Saloon">Saloon</option>
+                                                <option value="Estate">Estae</option>
+                                                <option value="MPV">MPV</option>
+                                            </select>
+                                            <p class="text-danger errormsg"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="">
+                                            <select class="form-control" id="amount" name="selectamount" style="width:283px">
+
+                                                <option value="Cash" selected>Cash</option>
+                                                <option value="return">Account</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="col-md-3">
+                                            <div class="form-group" id="mainDirection">
+                                                <select class="form-control" id="slectoption" name="slectoption" style="width:212px">
+
+                                                    <option value="">One Way</option>
+                                                    <option value="return">Return</option>
+                                                </select>
+                                            </div>
+                                        </div>*@
+
+
+
+                                    <div class="col-md-4">
+                                       
+                                            <div class="form-group" id="">
+                                                <select class="form-control" id="attribute" name="attribute" style="width:255px">
+                                                    <option value="">Select Attribute</option>
+                                                    <option value="Seat">Car Seat</option>
+                                                    <option value="Wheel chair">Wheel chair</option>
+                                                    <option value="Card Machine">Card Machine</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    
+
+                                </div>
+
+
+                                <div class="row mt-0">
+                                    <div class="col-md-4">
+                                        <input type="text" rows="5" name="message" class="form-control" placeholder="Any Message for Driver" style=" width:348px" id="message" />
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            @*<div class="col-md-1 mt-2 ml-7">Mile</div>*@
+                                            <div class="col-md-3  ml-6 mt-1 d-inline-flex" style="height:40px;">
+
+                                                <h2 class="mt-1 ml--1"> Mile:&nbsp;</h2>
+                                                <p class="badge mt-1" id="in_mile" name="in_mile" style="font-size:12px;border:2px solid #f0f0d0;width:50px;height:30px"> </p>
+                                                <span style="display:none;" id="inmile"></span>
+                                                <input type="hidden" name="inMiles" id="inMiles" />
+
+                                            </div>
+                                            @*<div class="col-md-1 mt-2 ml--5">Duration</div>*@
+                                            <div class="col-md-3 mt-1 ml--5 d-md-inline-flex" style="height:40px;">
+
+                                                <h2 class="mt-1 ml-1"> Duration:&nbsp;</h2>
+                                                <div class="form-group d-inline-flex">
+                                                    <p class="badge mt-1" id="duration_text" style="font-size:12px;border:2px solid #f0f0d0;width:137px;height:30px">  </p>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3 mt-1 ml-7 d-inline-flex" style="height:40px;">
+                                                @*<div class="col-md-1 mt-2 ml--3">Fare</div>*@
+                                                <h2 class="mt-1">Fare:&nbsp;</h2>
+                                                <div class="form-group d-inline-flex">
+                                                    <h6 class="py-md-1  mt-1" id="Price" style="font-size:12px;border:2px solid #f0f0d0;width:80px;height:30px">
+                                                        &nbsp;<i class="fas fa-pound-sign"> &nbsp;<span id="Prices"></span></i>
+
+                                                    </h6>
+                                                    <input type="hidden" name="price" id="price" />
+                                                    <i class="fa fa-spinner fa-spin" style="display:none;"></i>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                @*<div id="returndiv" style="display:none;">
+                                        <label class="returnDateTime">Return Date & Time</label><br />
+                                        <div class=" d-flex d-inline-flex">
+                                            <div class="form-group pr-1">
+                                                <input id="datepicker2" name="date2" type="text" class="form-control" placeholder="Pick-up Date" value="">
+                                            </div>
+                                            <div class="form-group pl-1">
+                                                <input type="text" id="timepicker2" name="time2" class="timepicker2 form-control" placeholder="Pick-up Time" value="">
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        &nbsp;
+                                        <button type="button" class="btn  ml--2 bt" value="Save" id="saveAjax">Save</button>
+                                        @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
+                                        <input type="button" class="btn  ml-1 bt" value="Save & Return" id="" />
+
+                                        <input type="button" class="btn  ml-1 bt" value="Save & Dispatch" id="" />
+                                        <input type="button" class="btn  ml-1 bt" value="Save & Repeat" id="" />
+                                        <input type="button" class="btn  bt" value=" Show Map" id="" />
+                                        @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
+                                    </div>
+                                </div>
+
+                                @*<div class="row">
+                                        <div class="col-md-12 text-center mt-2 ">
+                                            <input type="button" class="btn" id="GetQuote" style=" background: #264145;color:white;" value="Get Quote Now " />
+                                        </div>
+                                    </div>*@
+
+
+                                @*<div class="row w-100" id="pdm">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <p class="badge badge-primary py-md-2 pl-md-3 pr-md-5  w-100" id="in_mile" name="in_mile" style="width:100%;"></p>
+                                                <span style="display:none;" id="inmile"></span>
+                                                <input type="hidden" name="inMiles" id="inMiles" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-12">
+                                            <div class="form-group ">
+                                                <p class="badge badge-primary py-md-2 p-1 px-md-4 d" id="duration_text"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <h6 class="py-md-2 pricebadge" id="Price">
+                                                    Fare: &nbsp;&nbsp;  <i class="fas fa-pound-sign"></i> &nbsp;<span id="Prices"></span>
+                                                </h6>
+                                                <input type="hidden" name="price" id="price" />
+                                                <i class="fa fa-spinner fa-spin" style="display:none;"></i>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+
+                                @*<div class="form-group " style="display:none; " id="DriverMsg">
+                                        <input type="text" name="driverMessage" placeholder="Any Message for Driver(optional)" class="form-control" />
+                                    </div>*@
+
+                                @*<div class="form-group  text-center ">
+                                        <input type="submit" class="btn btn-primary" id="BookNow" style="background: #264145;color:white; display:none;" value="Book Now " />
+                                    </div>
+                                    <div class="form-group  text-center ">
+                                        <a href="#showLogin" class="btn btn-primary" id="LoginPopShow" style="background: #264145;color:white; display:none;"> Book Now</a>
+                                    </div>*@
+
+                            </form>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-2 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100px">
+            <h4 style="text-align:center; background-color:blue;color:white">Driver onBoard</h4>
+            <table class="table-hover " id="dritble">
+                <thead>
+                    <tr>
+                        <th>DriverId</th>
+                        <th>JobId</th>
+                    </tr>
+                </thead>
+                <tbody style="height:250px">
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="col-2 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px">
+            <h4 style="text-align:center; background-color:blue;color:white">Driver On Waiting</h4>
+            <table class="table-hover" style="height:250px">
+                <thead>
+                    <tr>
+                        <th>DriverId</th>
+                        <th>Vehicle</th>
+                    </tr>
+                </thead>
+                <tbody style="height:250px">
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>111</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Mehran</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div><!--row-->
+
+</div>
+<div class="container-fluid bg-gradient-gray">
+    <div class="row ml--4 mt bg-gradient" style="width:103%" id="body">
+
+        <div class="text-box" style="width:100%">
+            <table class="table-hover" cellpadding="5" style="width:100%" id="">
+                <thead id="">
+                    <tr>
+                        <th style="width:100px">JobId</th>
+                        <th>Time/Date</th>
+                        <th>PickUp</th>
+                        <th style="width:165px;">Drop Off</th>
+                        <th>Price</th>
+                        <th style="width:165px">Via</th>
+
+                        <th>vehicle</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>JobType</th>
+                        <th>AC.No</th>
+
+                    </tr>
+                </thead>
+                <tbody style=" height:140px!important;">
+
+                    @foreach (var value in Model)
+                    {
+                        <tr>
+                            <td style="width:100px">@value.id</td>
+                            <td id="">@value.dateAndTime</td>
+                            <td id="td">@value.pickUp</td>
+                            <td id="td">@value.DropUP</td>
+
+                            <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
+                            <td id="td">Multan</td>
+                            <td>@value.CarType</td>
+                            <td>@value.PassengerName</td>
+                            <td>@value.PassengerPhone</td>
+                            <td>@value.JobType</td>
+                            <td id="td">43502-5421-eff-255</td>
+
+                        </tr>
+
+                    }
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!--Right Click Event-->
+@*<div id="contextMenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li>
+                <a tabindex="-1" href="#">Edit</a>
+            </li>
+            <li>
+                <a tabindex="-1" href="#">Cancel</a>
+            </li>
+            <li>
+                <a tabindex="-1" href="#">Allocate</a>
+            </li>
+
+            <li>
+                <a tabindex="-1" href="#">Rreport</a>
+            </li>
+        </ul>
+    </div>*@
+
+
+
+
+
+<!--login box-->
+<div id="showLogin" style="display:none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 alert alert-info">
+                <h3 class="text-center">Login</h3>
+                <form id="loginForm">
+                    <div id="msg"><ul style="color:red;"> Invalid Username Or Password</ul></div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" type="email" name="Email" id="logEmail" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" type="password" name="Password" id="logPssword" placeholder="Password" />
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <button class="btn btn-info form-control" type="submit" onclick="Login()"><i class="glyphicon glyphicon-log-in"></i> Login</button>
+                </div>
+                <div class="form-group">
+                    @*<a style="float:left">Forget Password ? </a><a style="float:right;cursor:pointer" onclick="SignUp()"> Sign Up</a>*@
+                    <a class="btn-link" href="@Url.Action("Registration","Passengers")"> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//login boc-->
+@section scripts{
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+
+    <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&callback=initMap&key=AIzaSyAUeFGwxXtr8M8SD82BbA-6857CVPKUhNo" type="text/javascript"></script>
+
+
+
+
+
+    <script>
+        function initMap() {
+
+            var input = document.getElementById('searchTextField');
+
+            autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+    <script>
+        var distance_in_mile
+        var Login;
+        //  var passengerId;
+
+
+
+        $(function () {
+
+
+            // add input listeners
+            google.maps.event.addDomListener(window, 'load', function () {
+
+                var fromPlaces = document.getElementById('from_places');
+
+                var toPlaces = document.getElementById('to_places')
+                var from_places = new google.maps.places.Autocomplete(fromPlaces);
+                var to_places = new google.maps.places.Autocomplete(toPlaces);
+
+                function fromPlacesfunc() {
+                    var from_place = from_places.getPlace();
+                    var from_address = from_place.formatted_address;
+                    $('#origin').val(from_address);
+
+
+                }
+                function toPlacesfunc() {
+                    var to_place = to_places.getPlace();
+                    var to_address = to_place.formatted_address;
+                    $('#destination').val(to_address);
+
+                }
+
+                google.maps.event.addListener(from_places, 'place_changed', fromPlacesfunc);
+                google.maps.event.addListener(to_places, 'place_changed', toPlacesfunc);
+
+            });
+            // calculate distance
+            function calculateDistance() {
+                var origin = $('#origin').val();
+                var destination = $('#destination').val();
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix(
+                    {
+                        origins: [origin],
+                        destinations: [destination],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+                        // unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+                        avoidHighways: false,
+                        avoidTolls: false
+                    }, callback);
+            }
+            // get distance results
+            function callback(response, status) {
+                if (status != google.maps.DistanceMatrixStatus.OK) {
+                    $('#result').html(err);
+
+                } else {
+
+                    var origin = response.originAddresses[0];
+                    var destination = response.destinationAddresses[0];
+                    if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+
+                        $('#result').html("Better get on a plane. There are no roads between " + origin + " and " + destination);
+                    } else {
+
+
+                        var distance = response.rows[0].elements[0].distance;
+                        var duration = response.rows[0].elements[0].duration;
+                        console.log(response.rows[0].elements[0].distance);
+                        console.log(response.rows[0].elements[0].duration);
+                        var distance_in_kilo = distance.value / 1000; // the kilom
+                        distance_in_mile = distance.value / 1609.34; // the mile
+
+                        var duration_text = duration.text;
+                        console.log(duration_text);
+                        var duration_value = duration.value;
+                        console.log(duration_value);
+
+                        $('#in_mile').html(distance_in_mile.toFixed(0))
+                        //    .css({
+                        //    "padding": "13px",
+                        //    "margin-bottom": "2%",
+                        //    "border-color": "blue",
+                        //    "border-width": "2px",
+                        //    "border-style": "solid",
+
+
+
+                        //});
+
+                        $("#pric").css({
+                            content: "\00A3"
+                        })
+
+                        $("#pric").show();
+                        console.log("checking mile ..." + $('#in_mile').html(distance_in_mile.toFixed(0)));
+                        $('#inMiles').val(distance_in_mile.toFixed(0));
+                        $('#inmile').text(distance_in_mile.toFixed(0));
+
+                        $('#in_kilo').text(distance_in_kilo.toFixed(0));
+                        $('#duration_text').html('' + duration_text)
+                        //    .css({
+                        //    "padding": "13px",
+
+                        //    "text-align":"center",
+                        //    "margin-bottom": "2%",
+                        //    "border-color": "blue",
+                        //    "border-width": "2px",
+                        //    "border-style": "solid",
+
+
+
+                        //});
+                        $('#duration_value').text(duration_value);
+                        $('#from').text(origin);
+                        $('#to').text(destination);
+
+
+                        var m = distance_in_mile.toFixed(0);
+                        //var mile = parseInt(m);
+                        $('.fa-spin').show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/getPrice',
+                            data: { 'value': m, cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+                                $('#Price').css('display', 'block');
+
+                                $('#Prices').html(data.totalAmount)
+                                //    .css({
+
+                                //    "padding": "7px",
+                                //    "border-color": "blue",
+                                //    "border-width": "2px",
+                                //    "border-style": "solid",
+                                //    "content": "&#163"
+
+
+
+                                //});
+                                $("#price").val(data.totalAmount);
+                                console.log("your data submited successfull ");
+                            },
+                            error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                            },
+
+                            complete: function () {
+                                $('.fa-spin').hide();
+                            }
+                        });
+
+                        return false;
+
+                    }
+                }
+            }
+            // print results on submit the form
+
+            //$('#distanceform').submit(function (e) {
+            //   e.preventDefault();
+
+
+
+            //    });
+            // submitted form
+
+
+            var way
+            $('#slectoption').on('change', function () {
+
+                way = $(this);
+
+                if (way.val() == 'return') {
+                    $('#returndiv').show();
+                    $('#datepicker2,#timepicker2').prop('required', true);
+                }
+                else {
+                    $('#returndiv').hide();
+                    $('#datepicker2,#timepicker2').prop('required', false);
+                }
+            });
+
+
+            var hour;
+            $('#hours').on('change', function () {
+
+                hour = $(this);
+
+            });
+
+            //var cartype;
+            //$('#cartype').on('change', function () {
+
+            //    cartype = $(this);
+            //    var car = $(this).children(":selected").val();
+
+            //    if (cartype == '') {
+
+            //        $('.errormsg').html('please select the car type');
+
+            //        cartype = undefined;
+            //        return false;
+            //    }
+            //    else {
+            //        $('.errormsg').html('');
+
+            //        $("#selectedcar").val(car);
+            //    }
+
+            //    console.log(car);
+
+
+            //    // console.log($("#cartype").val(car))
+
+
+
+            //});
+
+            var picUpPostCode;
+            $('#PostCodeSelect2').on('change', function () {
+
+                picUpPostCode = $(this);
+
+                var postcodetext1 = $('#PostCodeSelect2 :selected').text();
+
+                $('#postcode_1').val(postcodetext1);
+            });
+
+            var dropOffPostCode;
+            $('#PostCode2Select2').on('change', function () {
+
+                dropOffPostCode = $(this);
+                var postcodetext2 = $('#PostCode2Select2 :selected').text();
+
+                $('#postcode_2').val(postcodetext2);
+
+            });
+
+
+
+            $('#cartype').change(function (e) {
+
+                if ($('.distance').hasClass("active")) {
+
+                    $('#jobType').val('Distance');
+                    $("#hourError").html('');
+                    console.log("getting price by distance");
+                    if ($('#from_places').val() == '') {
+                        $('#inputError1').html('Please enter your pick up address');
+
+                        return false;
+                    }
+                    else if ($('#to_places').val() == '') {
+                        $('#inputError2').html('Please enter your drop off address');
+
+                        return false;
+                    }
+
+                    //else if (cartype == undefined) {
+                    //    $('.errormsg').html('please select the car type');
+                    //    return false;
+                    //}
+                    else if (way == 'return') {
+                        $('#datepicker2,#timepicker2').prop('required', true)
+                    }
+
+                    else {
+                        $('.errormsg').html('');
+                        $('#inputError1').html('');
+                        $('#inputError2').html('');
+                        $('#datepicker,#timepicker').prop('required', true);
+
+
+                        e.preventDefault();
+                        calculateDistance();
+                        $('#GetQuote').hide();
+
+                        //  $('#BookNow').show();
+                        $('#DriverMsg').show();
+                        //$('#from_places,#to_places,#cartype').attr('disabled', 'disabled');
+
+
+
+                    }
+
+
+                }// ditance if end
+                else if ($('.hourly').hasClass("active")) {
+
+                    $('#jobType').val('Hourly');
+                    console.log("getting price by hourly");
+
+                    if ($('#from_places').val() == '') {
+                        $('#inputError1').html('Please enter your pick up address');
+
+                        return false;
+                    }
+                    else if (hour == null) {
+
+                        $("#hourError").html('please select  the hours');
+
+
+                        return false;
+
+                    }
+                    else if (cartype == undefined) {
+                        $('.errormsg').html('please select the car type');
+                        return false;
+                    }
+
+                    else {
+
+                        $('.errormsg,#hourError').html('');
+                        $('#inputError1').html('');
+                        $('#inputError2').html('');
+                        $('#postcodeError,#postcodeError2').html('');
+
+                        $('#GetQuote').hide();
+                        // $('#BookNow').show();
+                        $('#DriverMsg').show();
+                        $('#datepicker,#timepicker').prop('required', true);
+                        $('#hours,#cartype').attr('disabled', 'disabled');
+
+                        $('.fa-spin').show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/getPriceByhHours',
+                            data: { 'value': $('#hours').val(), cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+
+                                $('#Price').css('display', 'block');
+
+                                $('#Prices').html(data.totalAmount);
+                                $("#price").val(data.totalAmount);
+                                // $("#price").val(data.totalAmount);
+                                console.log("your data submited successfull ");
+                            },
+                            error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                            },
+
+                            complete: function () {
+                                $('.fa-spin').hide();
+                            }
+                        });
+
+
+
+
+
+                    }
+
+
+                }// hourly else if end
+
+
+
+                else if ($('.flateRate').hasClass("active")) {
+
+                    $('#jobType').val('FlateRate ');
+                    console.log("getting price by Flate");
+                    $("#hourError").html('');
+
+
+                    if (picUpPostCode == null) {
+
+                        $('#postcodeError').html('please select pick up post code');
+                    }
+                    else if (dropOffPostCode == null) {
+                        $('#postcodeError2').html('please select  drop off post code');
+                    }
+                    else if (cartype == undefined) {
+                        $('.errormsg').html('please select the car type');
+                        return false;
+                    }
+                    else if (way == 'return') {
+                        $('#datepicker2,#timepicker2').prop('required', true)
+                    }
+
+                    else {
+                        $('.errormsg,#hourError').html('');
+                        $('#inputError1').html('');
+                        $('#inputError2').html('');
+                        $('#postcodeError,#postcodeError2').html('');
+                        $('#datepicker,#timepicker').prop('required', true);
+                        $('#PostCodeSelect2,#PostCode2Select2').attr('disabled', 'disabled');
+                        $('#hours,#cartype').attr('disabled', 'disabled');
+                        $('#GetQuote').hide();
+
+                        //   $('#BookNow').show();
+                        $('#DriverMsg').show();
+                        $('.fa-spin').show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/getPriceByFlateRate',
+                            data: { 'postcode1': $('#PostCodeSelect2').val(), 'postcode2': $('#PostCode2Select2').val(), cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+                                $('#Price').css('display', 'block');
+                                if (data.totalAmount == 0) {
+                                    $("#Prices").html('?.  Call on 079 7387 3598 for discounted price on this journey');
+                                    err = 1;
+                                    return false;
+                                }
+
+                                else {
+                                    err = 0;
+                                    $('#Prices').html(data.totalAmount);
+                                    $("#price").val(data.totalAmount);
+
+                                }
+
+
+
+
+                                console.log("your data submited successfull ");
+                            },
+                            error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                            },
+
+                            complete: function () {
+                                $('.fa-spin').hide();
+                            }
+                        });
+                    }
+
+                }// flate Rate else if end
+
+                else {
+                    console.log("something wrong when you getting the price ");
+                }// end else condition of fetQuote
+
+                var sessionId = null;
+
+                $("#passengerId").val(sessionId);
+                $("#BookNow").show();
+
+
+
+            });
+
+
+        });
+    </script>
+    @* //for get price and mile using google map*@
+
+
+    @*<script type="text/javascript">
+
+            $('.dhf,#refreshForm2').on('click', function () {
+                $('#formMain2').find("input,select").not("input[type=button],#datepicker,.timepicker,#BookNow,#LoginPopShow").val('');
+
+                $('#in_mile,#duration_text,#Prices').html('');
+                $('#Price').css('display', 'none');
+                $('#GetQuote').show();
+                $('#BookNow').hide();
+                $('#DriverMsg').hide();
+                $('#from_places,#to_places,#cartype,#hours,#PostCodeSelect2,#PostCode2Select2').attr('disabled', false);
+                $('#BookNow').hide();
+                $("#LoginPopShow").hide();
+
+                $("#PostCodeSelect2").select2({
+                    placeholder: "Select a Pick Up Postcode",
+                    allowClear: true
+
+                });
+                $("#PostCode2Select2 ").select2({
+                    placeholder: "Select Drop Off Postcode",
+                    allowClear: true
+
+                });
+
+
+
+            });
+
+        </script>*@
+
+
+    <!-- Time -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
+
+
+
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd/mm/yy' });
+
+            $("#datepicker").datepicker().datepicker("setDate", new Date());
+
+            $('.ui-datepicker').hide();
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+
+        });
+    </script>
+    <script type="text/javascript">
+
+        $('.timepicker,.timepicker2').wickedpicker({
+            twentyFour: false,
+
+        });
+        var timepicker = $('.timepicker').wickedpicker();
+
+        var getCurrentTime = timepicker.wickedpicker('time');
+        $('.timepicker').val(getCurrentTime);
+
+    </script>
+    <!-- Time -->
+    <!--// Date Picker -->
+    <!-- //Calendar -->
+    <!-- //carousel -->
+    <!--slider-->
+    @*booking form fields show and hide*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#PostCode2Select2 ,#PostCodeSelect2').select2({
+
+
+            });
+
+
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+
+            $('.hourly').click(function () {
+                $('#HourMain').show();
+                $('#mainDirection').hide();
+                $('#flateRates').hide();
+                $('.pick').show();
+                $('.Drop').hide();
+                //$('#slectoption').val('oneWay');
+                $('#slectoption').val('oneWay');
+
+                $('#returndiv').hide();
+            });
+            $('.distance').click(function () {
+
+                $('#HourMain').hide();
+                $('#mainDirection').show();
+                $('#flateRates').hide();
+                $('.pick').show();
+                $('.Drop').show();
+            });
+
+            $('.flateRate').click(function () {
+                $('#HourMain').hide();
+                $('#mainDirection').show();
+                $('#flateRates').show();
+                $('.pick').hide();
+                $('.Drop').hide();
+            })
+
+        });
+    </script>
+    <script>
+
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("formHead");
+        var btns = header.getElementsByClassName("dhf");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+
+                var current = document.getElementsByClassName("active");
+
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+                //console.log(current[0]);
+
+            });
+        }
+
+    </script>
+
+    //Right Click Event
+
+    <script>
+        $(function () {
+
+            var $contextMenu = $("#contextMenu");
+
+            $("body").on("contextmenu", "table tr", function (e) {
+                $contextMenu.css({
+                    "background-color": "yellow", "font-size": "100%",
+                    display: "block",
+
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                return false;
+            });
+
+            $('html').click(function () {
+                $contextMenu.hide();
+            });
+
+        });
+    </script>
+
+
+
+
+
+    //Book Job using Ajax
+    <script>
+
+        $(document).ready(function() {
+            //console.log('Jquery is work correctly');
+            $("#saveAjax").click(function() {
+
+               // alert("ok");
+                //consol.log("Work correctly");
+                var pname1 = $("#Pname").val();
+               // alert(pname1);
+                var phones = $("#Phone").val();
+               // alert(phones);
+                var dates = $("#datepicker").val();
+                var times = $("#timepicker").val();
+                //var postcodeselect2 = $("#PostCodeSelect2").val();
+                //var postcodeselect3 = $("#PostCode2Select3").val();
+
+
+                var From_Places = $("#from_places").val();
+                var Doornumber = $("#doorno").val();
+                var To_Places = $("#to_places").val();
+                var Doorno1 = $("#doorno1").val();
+                var CarType = $("#cartype").val();
+                var Account = $("#amount").val();
+                var Attribute = $("#attribute").val();
+                var Message = $("#message").val();
+
+
+                $.ajax({
+                    type: "POST",
+                    url:"@Url.Action( "SaveJobAjx", "jobBooking")",
+                   
+                    data: {
+
+                        name1: pname1,
+                        PhoneNo1: phones,
+                      
+                       date1: dates,
+
+
+                        times1: times,
+                        //postcodeselect1: postcodeselect2,
+                        //postcodeselect11: postcodeselect3,
+
+                        From_Places1: From_Places,
+                        Doornumber1: Doornumber,
+                        To_Places1: To_Places,
+                        Doorno12: Doorno1,
+                        CarType1: CarType,
+                        Account1: Account,
+                        Attribute1: Attribute,
+                        Message12: Message
+                    },
+                    dataType: "json",
+
+                    success: function (success) {
+                      //  alert("Data is save");
+                      //  alert("success" + success)
+                        console.log("success " + success.Account1);
+
+                    },
+                    error: function () {
+
+                        alert("something wrong !");
+                    }
+                });
+            });
+
+
+
+
+
+        });
+
+
+    </script>
+
+
+
+
+
+}

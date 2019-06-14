@@ -1,0 +1,775 @@
+﻿@model thechauffeurteam.Models.ViewModel.DriverRegistrationViewModel
+@{
+    ViewBag.Title = "DriverDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="row mt-5">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="col-md-12 table-dark" style="text-align :center;font-family:Arial;padding:20px;border-radius:5px 5px 0 0">
+                        <h3 class="text-light">Driver Detail</h3>
+                    </div>
+                    <div class="col-md-12 bg-gradient-secondary" style="padding-bottom:50px;border-bottom-left-radius:5px;border-bottom-right-radius:5px">
+                        <br><br>
+
+                        @using (Html.BeginForm()) //"UpdateDriver","Driver"
+                        {
+
+                            @Html.AntiForgeryToken()
+
+                            <!-- Nav tabs -->
+
+                            <ul class="nav nav-tabs nav-justified" role="tablist" style="margin:20px">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#driver">Driver</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#vehicle">Vehicle</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#login">Login</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div id="driver" class="container tab-pane active">
+
+                                    <div style="background-color:white;border-top:2px solid #59D1D3;padding-top:15px;border-radius:5px;padding-bottom:10px;width:100%;">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h5>PERSONAL DETAIL</h5><br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="address"><b>Driver Id</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.DriverId, new { htmlAttributes = new { @class = "form-control", placeholder = "Driver Id" } })
+                                                                @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="address"><b>Status</b></label>
+                                                            <div class="col-sm-12">
+                                                                <select class="form-control" name="status">
+                                                                    @if (Model.Status.Equals("Waiting"))
+                                                                    {
+                                                                        <option value="1" selected>Waiting</option>
+                                                                        <option value="2">Approved</option>
+                                                                        <option value="3">Rejected</option>
+                                                                    }
+                                                                    else if (Model.Status.Equals("Approved"))
+                                                                    {
+                                                                        <option value="1">Waiting</option>
+                                                                        <option value="2" selected>Approved</option>
+                                                                        <option value="3">Rejected</option>
+
+                                                                    }
+                                                                    else if (Model.Status.Equals("Rejected"))
+                                                                    {
+                                                                        <option value="1">Waiting</option>
+                                                                        <option value="2">Approved</option>
+                                                                        <option value="3" selected>Rejected</option>
+
+                                                                    }
+                                                                    else if (Model.Status.Equals("Busy"))
+                                                                    {
+                                                                        <option value="1">Waiting</option>
+                                                                        <option value="2">Approved</option>
+                                                                        <option value="3">Rejected</option>
+                                                                        <option value="3" selected>Busy</option>
+
+                                                                    }
+                                                                </select>
+                                                                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", placeholder = "waiting,approved,cancel" } })
+                                                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="name"><b>Driver Name</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.DriverName, new { htmlAttributes = new { @class = "form-control", placeholder = "Driver Name" } })
+                                                                @Html.ValidationMessageFor(model => model.DriverName, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="address"><b>Driver Address</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Driver Address" } })
+                                                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="Gender"><b>Gender</b></label>
+                                                            <div class="col-sm-12">
+
+                                                                <select class="form-control" name="gender">
+                                                                    @if (Model.Gender.Equals("Male"))
+                                                                    {
+                                                                        <option value="1" selected>Male</option>
+                                                                        <option value="2">Female</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="1">Male</option>
+                                                                        <option value="2" selected>Female</option>
+                                                                    }
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="dateOfBirth"><b>Date of Birth</b></label>
+                                                            <div class="col-sm-12">
+                                                                <input type="hidden" id="dob" value="@Model.DateOfBirth" class="form-control" />
+                                                                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "dateOB" } })
+                                                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="nationality"><b>Nationality</b></label>
+                                                            <div class="col-sm-12">
+
+                                                                @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3" style="padding-right:30px">
+                                                <div class="form-group" style="background-image:url('../../Img/images.jpg');height:200px;width:200px">
+                                                    @if (Model.DriverImage != null)
+                                                    {
+                                                        <img src="data:image;base64,@Convert.ToBase64String(Model.DriverImage)" style="width:200px" data-toggle="modal" data-target="#driverImgModel" />
+                                                    }
+
+                                                    @*<input type="file"><img src="data:image;base64,@Convert.ToBase64String(Model.DriverImage)" style="margin:-2PX" />*@
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="city"><b>City</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="postCode"><b>Post Code</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Post Code" } })
+                                                    @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for=" email"><b>Email</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.DriverEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Driver Email" } })
+                                                        @Html.ValidationMessageFor(model => model.DriverEmail, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="phNo"><b>Phone</b></label>
+                                                    <div class="col-sm-12">
+
+                                                        @Html.EditorFor(model => model.phNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone" } })
+                                                        @Html.ValidationMessageFor(model => model.phNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for=" fax"><b>Fax</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "Fax" } })
+                                                        @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="joinDate"><b>Join Date</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="leftDate"><b>Left Date</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.LeftDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.LeftDate, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label col-sm-12"><b>Do you Accept Direct Cards Payments from Passengers :</b></label>
+
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label class="control-label col-sm-12"><b></b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.DirectCash, new { @class = "custom-control-input" })
+                                                    @Html.ValidationMessageFor(model => model.DirectCash, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label col-sm-12">
+                                                    <b>Would you like Account Jobs (Y/N): </b><br />
+                                                    <i>Note: Account amount is paid after the end of month.</i>
+                                                </label>
+
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label class="control-label col-sm-12"><b></b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.LikeAccount)
+                                                    @Html.ValidationMessageFor(model => model.LikeAccount, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div style="background-color:white;border-top:2px solid #5A84B7;padding-top:15px;border-radius:5px;padding-bottom:50px;width:100%;margin-top:20px">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h5>LICENSE DETAIL</h5><br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="NINumber"><b>NI/Tax Number</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.NiNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "NI/Tax Number" } })
+                                                                @Html.ValidationMessageFor(model => model.NiNumber, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="licenseNo"><b>License Number</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.LicenseNo, new { htmlAttributes = new { @class = "form-control", placeholder = "License Number" } })
+                                                                @Html.ValidationMessageFor(model => model.LicenseNo, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="licensetype"><b>License Type</b></label>
+                                                            <div class="col-sm-12">
+
+                                                                @Html.EditorFor(model => model.LicenseType, new { htmlAttributes = new { @class = "form-control", placeholder = "License Type" } })
+                                                                @Html.ValidationMessageFor(model => model.LicenseType, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="startDate"><b>License issue Date</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="expDate"><b>License Expiry Date</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="padding-right:30px;margin-top:-30px">
+                                                <div class="form-group" style="background-image:url('../../Img/');height:200px;width:200px">
+
+                                                    @if (Model.LicenseImage != null)
+                                                    {
+                                                        <img src="data:image;base64,@Convert.ToBase64String(Model.LicenseImage)" style="width:200px" data-toggle="modal" data-target="#licenseImgModel" />
+                                                    }
+
+                                                    @*<input type="file"><img src="" style="margin:-2PX" />*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label class="control-label col-sm-12" for="InsuPre"><b>Insurance Premium</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.Insurance, new { htmlAttributes = new { @class = "form-control", placeholder = "Insurance Premium" } })
+                                                    @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        </div><br />
+                                    </div>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs justify-content-center" role="tablist" style="margin:20px">
+                                        <li class="nav-item btn btn-outline-info">
+                                            <a class="nav-link " data-toggle="tab" href="#vehicle">Next</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                @* --------------------- *@
+                                <div id="vehicle" class="container tab-pane fade">
+
+                                    <div style="background-color:white;border-top:2px solid #5A84B7;padding-top:15px;border-radius:5px;padding-bottom:50px;width:100%;margin-top:20px">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h5>VEHICLE DETAIL</h5><br />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-12" for="carType"><b>Car Type</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.CarType, new { htmlAttributes = new { @class = "form-control", placeholder = "Car Type" } })
+                                                                @Html.ValidationMessageFor(model => model.CarType, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="model"><b>Car Model</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.CarModel, new { htmlAttributes = new { @class = "form-control", placeholder = "Car Model" } })
+                                                                @Html.ValidationMessageFor(model => model.CarModel, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="make"><b>Make</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.Make, new { htmlAttributes = new { @class = "form-control", placeholder = "Make" } })
+                                                                @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="year"><b>Year</b></label>
+                                                            <div class="col-sm-12">
+
+                                                                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group ">
+                                                            <label class="control-label col-sm-12" for="disc"><b>Description</b></label>
+                                                            <div class="col-sm-12">
+                                                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                                                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3" style="padding-right:30px">
+                                                <div class="form-group" style="background-image:url('../../Img/');height:200px;width:200px">
+                                                    @if (Model.CarImage != null)
+                                                    {
+
+                                                        <img src="data:image;base64,@Convert.ToBase64String(Model.CarImage)" style="width:200px" data-toggle="modal" data-target="#carImgModel" />
+                                                    }
+
+                                                    @*<img src="" style="margin:-2PX" />
+                                                        <input type="file" />*@
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="reg"><b>Registration</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.Registration, new { htmlAttributes = new { @class = "form-control", placeholder = "Registration" } })
+                                                        @Html.ValidationMessageFor(model => model.Registration, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="color"><b>Color</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control", placeholder = "Vehicle Color" } })
+                                                        @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="passenger"><b>Max Passengers</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.MaxPassenger, new { htmlAttributes = new { @class = "form-control", placeholder = "Max Passengers" } })
+                                                        @Html.ValidationMessageFor(model => model.MaxPassenger, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="luggage"><b>Max Luggage</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.MaxLuggage, new { htmlAttributes = new { @class = "form-control", placeholder = "Max Luggages" } })
+                                                        @Html.ValidationMessageFor(model => model.MaxLuggage, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="licenseNo"><b>License No</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.CarLicenseNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Vehicle License No" } })
+                                                        @Html.ValidationMessageFor(model => model.CarLicenseNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="licenseExp"><b>License / PCO (Vehicle) expire</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.VehicleLicenseExp, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.VehicleLicenseExp, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="insurancePrem"><b>Insurance Premium</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.VehicleInsurance, new { htmlAttributes = new { @class = "form-control", placeholder = "Vehicle Insurance Premium" } })
+                                                        @Html.ValidationMessageFor(model => model.VehicleInsurance, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="insuranceExp"><b>Insurance Expiry</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.InsuranceExpiry, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.InsuranceExpiry, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="motExp"><b>Mot Expiry</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.MotExpire, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.MotExpire, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-12" for="roadTaxExp"><b>Road Tax Expiry</b></label>
+                                                    <div class="col-sm-12">
+                                                        @Html.EditorFor(model => model.RoadTaxExpiry, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.RoadTaxExpiry, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br />
+
+                                    </div>
+
+                                </div>
+                                <div id="login" class="container tab-pane fade">
+
+                                    <div style="background-color:white;border-top:2px solid red;padding:15px;border-radius:5px;padding-bottom:50px;width:100%;margin-top:20px">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h5>LOGINS ACCOUNT DETAIL</h5><br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="UserFirstName"><b>First Name</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.UserFirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                                                    @Html.ValidationMessageFor(model => model.UserFirstName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="userlName"><b>Last Name</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.UserLastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                                                    @Html.ValidationMessageFor(model => model.UserLastName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-12" for="UserPhNo"><b>Mobile</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.UserPhNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile" } })
+                                                    @Html.ValidationMessageFor(model => model.UserPhNo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="UserEmail"><b>Email</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                                                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="Password"><b>Password</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-sm-12" for="ConformPassword"><b>Conform Password</b></label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.ConformPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Re-Enter Password" } })
+                                                    @Html.ValidationMessageFor(model => model.ConformPassword, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="background-color:white;padding-top:15px;border-radius:5px;padding-bottom:50px;width:100%;margin-top:20px">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h5>TERMS AND CONDITION</h5><br />
+                                            </div>
+                                        </div>
+
+                                        <div class=" col-md-12">
+                                            @*<div class="form-group col-md-12">
+                                                    <ol type="seq" class="col-md-12">
+                                                        <li>Cab Office will be fully responsible for serving a Job once it has been booked or assigned on website in result of settings, failures or delays in job will result into termination of relationship between cabOffice and partner Cab Office.</li>
+                                                        <li>Cab Office will ensure accurate settings (waiting times, freezing and rates) on website all the times for smooth Job handling. Same cabOffice fee will be applicable in case of failures and delays in assigned jobs.</li>
+                                                        <li><b>8% fee of total job amount</b> will be charged by cabOffice in every job booked or assigned (Cash and Account) to cab office on monthly basis and will be payable within 7 days of Invoice</li>
+                                                        <li>Momin Solutions LTD is trading as cabOffice is not a licensed private hire operator. cabOffice services are acting as a Booking Agent.</li>
+                                                        <li>All Standard Contracts and Payment terms are included as per UK law.</li>
+                                                    </ol>
+
+                                                </div>*@
+                                            <hr />
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                        <input type="checkbox" class="custom-control-input" id="conditionAgreeCheckbox">
+                                                        <label class="custom-control-label" for="conditionAgreeCheckbox"><b>I agree </b>to be bound by the terms and conditions</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                        <input type="checkbox" class="custom-control-input" id="appAgreeCheckbox">
+                                                        <label class="custom-control-label" for="appAgreeCheckbox"><b>I agree </b> that this application form may be used as part of a credit check undertaken by cabOffice and/or their nominated agents.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center" style="justify-content:center;align-items:center; margin-top:50px">
+                                        <button type="submit" class="btn btn-hover-group col-md-4 justify-content-center">Save</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal fade"  id="carImgModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:auto">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Car Image</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.CarImage)" style="width:750px" />
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="carImgModel1">
+        <div class="modal-dialog modal-lg" style="width:auto">
+            <div class="modal-content " style="width:1000px">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Car Image</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.CarImage)" style="width:300px" />
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    @*<div class="modal fade" id="driverImgModel">
+        <div class="modal-dialog modal-dialog-centered" style="width:auto">
+            <div class="modal-content" style="width:1000px">*@
+    <div class="modal fade" id="driverImgModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:auto">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Driver Image</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.DriverImage)" style="width:750px" />
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="licenseImgModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:auto">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Licence</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.LicenseImage)" style="width:750px" />
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#dateOB").val($("#dob").val());
+        
+    }
+</script>
+
+

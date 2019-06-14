@@ -1,0 +1,1026 @@
+﻿
+@{
+    ViewBag.Title = "BookJob";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int UserSessionId = 0;
+}
+<head>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
+
+
+
+    <style>
+
+
+        #formMain2 {
+            background-color: rgba(555,555,555,0.6);
+            border: 5px solid rgba(555,555,555,0.6);
+        }
+
+        #formMain2 {
+            background-color: rgba(555,555,555,0.6);
+            border: 5px solid rgba(555,555,555,0.6);
+        }
+
+        #formHead .active, .dhf:hover {
+            background-color: #1853a1;
+            color: white;
+        }
+
+
+        .formBody {
+        }
+
+        .dhf {
+            /*background-color: #212529;*/
+            color: white;
+            width: 35%;
+            height: 65px;
+            text-align: center;
+            padding-top: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #1853a1;
+            color: #1853a1;
+        }
+
+            #formHead .active, .dhf:hover {
+                background-color: #1853a1;
+                color: white;
+            }
+
+        .PicUpTime {
+            color: #1853a1;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .timefield {
+            width: 130px;
+        }
+
+        .Hourfield {
+            width: 50%;
+        }
+
+        #HourMain {
+            display: none;
+        }
+
+        #flateRates {
+            display: none;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 40px !important;
+        }
+
+
+        .pricebadge {
+            display: none;
+            background: #1853a1;
+            color: #fff;
+            text-align: center;
+        }
+
+        .wickedpicker {
+            z-index: 111;
+        }
+
+        .wickedpicker__title {
+            background: #1853a1;
+        }
+        .returnDateTime {
+            background: #1853a1;
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+
+
+
+<div style="background-image:url('../../images/bgform.jpg'); background-size:cover;">
+    <div class="row ">
+        <div class="col-md-2 "></div>
+        <div class="col-md-8 driverReg  p-md-4 mt-1">
+
+            <div class="row justify-content-center mt-md-5 ">
+                <div class="col-md-10 register-form">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align :center;background-color:#1853a1;font-family:Arial;padding:20px;border-radius:5px 5px 0 0">
+                            <h3 style="color:#fff;">Book Now</h3>
+                        </div>
+
+                    </div>
+
+
+                    <div id="refreshForm2" title="Reset ">
+                        <span class="badge badge-info bad"> <i class="fas fa-sync-alt"></i></span>
+                    </div>
+
+                    <div id="formMain2" class="">
+
+
+                        <div id="formHead" class="d-flex flex-row">
+                            <div class="dhf active distance"> Distance</div>
+                            <div class="dhf hourly">Hourly </div>
+                            <div class="dhf flateRate">Flat Rate</div>
+
+
+                        </div>
+
+                        <div class="formBody p-4">
+
+                            <form method="post" id="distanceform" action="/JobBooking/booking">
+                                <div id="flateRates">
+                                    <div class="form-group">
+                                        @Html.DropDownList("pickUpPostcode", ViewBag.pickUpPostcode as SelectList, "Select Pick Up Post Code", new { @class = "form-control", @id = "PostCodeSelect2", @style = "width: 100%" })
+
+                                        <p class="text-danger" id="postcodeError"></p>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        @Html.DropDownList("dropOffPostcode", ViewBag.dropOffPostcode as SelectList, "Select Drop Off Post Code", new { @class = "form-control", @id = "PostCode2Select2", @style = "width: 100%" })
+                                        <p class="text-danger" id="postcodeError2"></p>
+
+                                    </div>
+                                </div> <!--flate rates-->
+
+                                <div class="form-group pick">
+                                    <input type="hidden" id="searchTextField" placeholder="enter the informtion">
+                                    <input type="text" id="from_places" placeholder="Pick Up Address" class="form-control" required />
+
+                                    <input type="hidden" id="origin" name="origin" required="" />
+                                    <input type="hidden" name="jobType" id="jobType" />
+                                    <input type="hidden" name="passengerId" id="passengerId" />
+                                    <input type="hidden" name="selectedcar" id="selectedcar" />
+
+
+
+                                    <p class="text-danger" id="inputError1"> </p>
+                                </div>
+
+                                <input type="hidden" name="postcode_1" id="postcode_1" />
+                                <input type="hidden" name="postcode_2" id="postcode_2" />
+                                <div id="HourMain">
+
+
+                                    <div class="d-flex flex-row">
+                                        <div class="p-md-2"> <p class="PicUpTime">Trip Duration</p></div>
+                                        <div class="form-group Hourfield">
+                                            <select class="form-control" id="hours" name="hours">
+                                                <option value="">Select Hour(s)</option>
+                                                <option value="01">01 Hour(s)</option>
+                                                <option value="02">02 Hour(s)</option>
+                                                <option value="03">03 Hour(s)</option>
+                                                <option value="04">04 Hour(s)</option>
+                                                <option value="05">05 Hour(s)</option>
+                                                <option value="06">06 Hour(s)</option>
+                                                <option value="07">07 Hour(s)</option>
+                                                <option value="08">08 Hour(s)</option>
+                                                <option value="09">09 Hour(s)</option>
+                                                <option value="10">10 Hour(s)</option>
+                                                <option value="11">11 Hour(s)</option>
+                                                <option value="12">12 Hour(s)</option>
+                                                <option value="13">13 Hour(s)</option>
+                                                <option value="14">14 Hour(s)</option>
+                                                <option value="15">15 Hour(s)</option>
+                                                <option value="16">16 Hour(s)</option>
+                                                <option value="17">17 Hour(s)</option>
+                                                <option value="18">18 Hour(s)</option>
+                                                <option value="19">19 Hour(s)</option>
+                                                <option value="20">20 Hour(s) </option>
+                                                <option value="20">20 Hour(s)</option>
+                                                <option value="20">20 Hour(s)</option>
+                                                <option value="21">21 Hour(s)</option>
+                                                <option value="22">22 Hour(s)</option>
+                                                <option value="23">23 Hour(s)</option>
+                                                <option value="00">00 Hour(s)</option>
+
+                                            </select>
+                                            <p class="text-danger" id="hourError"></p>
+                                        </div>
+
+
+                                    </div>
+
+                                </div><!--hour rates-->
+
+                                <div class="form-group Drop">
+                                    <input type="text" id="to_places" name="dropOff" placeholder="Drop Off Address" class="form-control" required />
+
+                                    <input id="destination" name="destination" required="" type="hidden" />
+                                    <p class="text-danger" id="inputError2"> </p>
+                                </div>
+
+                                <div class="form-group" id="mainDirection">
+                                    <select class="form-control" id="slectoption" name="slectoption">
+
+
+                                        <option value="">One Way</option>
+                                        <option value="return">Return</option>
+                                    </select>
+                                </div>
+
+
+                                <div class=" d-flex d-inline-flex">
+                                    <div class="form-group pr-1">
+                                        <input id="datepicker" name="date" type="text" class="form-control" placeholder="Pick-up Date" value="">
+                                    </div>
+                                    <div class="form-group pl-1">
+
+                                        <input type="text" id="timepicker" name="time" class="timepicker form-control" placeholder="Pick-up Time" value="">
+
+                                    </div>
+                                </div>
+                                <div id="returndiv" style="display:none;">
+                                    <label class="returnDateTime">Return Date & Time</label><br />
+
+                                    <div class=" d-flex d-inline-flex">
+
+                                        <div class="form-group pr-1">
+                                            <input id="datepicker2" name="date2" type="text" class="form-control" placeholder="Pick-up Date" value="">
+                                        </div>
+                                        <div class="form-group pl-1">
+
+                                            <input type="text" id="timepicker2" name="time2" class="timepicker2 form-control" placeholder="Pick-up Time" value="">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <select class="form-control" id="cartype" name="cartype">
+
+                                        <option value="">Car Type</option>
+                                        <option value="E_Class">E-Class</option>
+                                        <option value="S_Class">S-Class</option>
+                                        <option value="V_Class">V-Class</option>
+
+                                    </select>
+                                    <p class="text-danger errormsg"></p>
+                                </div>
+
+
+
+
+
+                                <div class="row w-100" id="pdm">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <p class="badge badge-primary py-md-2 pl-md-3 pr-md-5  w-100" id="in_mile" name="in_mile" style="width:100%;"></p>
+                                            <span style="display:none;" id="inmile"></span>
+
+                                            <input type="hidden" name="inMiles" id="inMiles" />
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="col-md-8 col-sm-12">
+                                        <div class="form-group ">
+                                            <p class="badge badge-primary py-md-2 p-1 px-md-4 d" id="duration_text"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+
+                                            <h6 class="py-md-2 pricebadge" id="Price">
+                                                Fare: &nbsp;&nbsp;  <i class="fas fa-pound-sign"></i> &nbsp;<span id="Prices"></span>
+                                            </h6>
+                                            <input type="hidden" name="price" id="price" />
+                                            <i class="fa fa-spinner fa-spin" style="display:none;"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="form-group " style="display:none; " id="DriverMsg">
+                                    <input type="text" name="driverMessage" placeholder="Any Message for Driver(optional)" class="form-control" />
+                                </div>
+
+                                <div class="col-md-12 text-center ">
+                                    <input type="button" class="btn" id="GetQuote" style=" background: #1853a1;color:white;" value="Get Quote Now " />
+                                </div>
+                                <div class="form-group  text-center ">
+                                    <input type="submit" class="btn btn-primary" id="BookNow" style="background: #1853a1;color:white; display:none;" value="Book Now " />
+                                </div>
+                                <div class="form-group  text-center ">
+
+                                    <a href="#showLogin" class="btn btn-primary" id="LoginPopShow" style="background: #1853a1;color:white; display:none;"> Book Now</a>
+                                </div>
+
+                            </form>
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div><!--row-->
+</div>
+
+
+<!--login box-->
+<div id="showLogin" style="display:none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 alert alert-info">
+                <h3 class="text-center">Login</h3>
+                <form id="loginForm">
+                    <div id="msg"><ul style="color:red;"> Invalid Username Or Password</ul></div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" type="email" name="Email" id="logEmail" placeholder="Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" type="password" name="Password" id="logPssword" placeholder="Password" />
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <button class="btn btn-info form-control" type="submit" onclick="Login()"><i class="glyphicon glyphicon-log-in"></i> Login</button>
+                </div>
+                <div class="form-group">
+                    @*<a style="float:left">Forget Password ? </a><a style="float:right;cursor:pointer" onclick="SignUp()"> Sign Up</a>*@
+                    <a class="btn-link" href="@Url.Action("Registration","Passengers")"> Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//login boc-->
+@section scripts{
+
+    <script src="~/Scripts/select2.min.js"></script>
+
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+   
+
+    
+    <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&callback=initMap&key=AIzaSyAUeFGwxXtr8M8SD82BbA-6857CVPKUhNo" type="text/javascript"></script>
+    <script>
+        function initMap() {
+
+            var input = document.getElementById('searchTextField');
+
+            autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
+
+    <script>
+        var distance_in_mile
+        var Login;
+        var passengerId;
+     
+       
+
+        $(function () {
+
+
+            // add input listeners
+            google.maps.event.addDomListener(window, 'load', function () {
+
+                var fromPlaces = document.getElementById('from_places');
+                var toPlaces = document.getElementById('to_places')
+                var from_places = new google.maps.places.Autocomplete(fromPlaces);
+                var to_places = new google.maps.places.Autocomplete(toPlaces);
+
+                function fromPlacesfunc() {
+                    var from_place = from_places.getPlace();
+                    var from_address = from_place.formatted_address;
+                    $('#origin').val(from_address);
+
+                }
+                function toPlacesfunc() {
+                    var to_place = to_places.getPlace();
+                    var to_address = to_place.formatted_address;
+                    $('#destination').val(to_address);
+
+                }
+
+                google.maps.event.addListener(from_places, 'place_changed', fromPlacesfunc);
+                google.maps.event.addListener(to_places, 'place_changed', toPlacesfunc);
+
+            });
+            // calculate distance
+            function calculateDistance() {
+                var origin = $('#origin').val();
+                var destination = $('#destination').val();
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix(
+                    {
+                        origins: [origin],
+                        destinations: [destination],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+                        // unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+                        avoidHighways: false,
+                        avoidTolls: false
+                    }, callback);
+            }
+            // get distance results
+            function callback(response, status) {
+                if (status != google.maps.DistanceMatrixStatus.OK) {
+                    $('#result').html(err);
+
+                } else {
+
+                    var origin = response.originAddresses[0];
+                    var destination = response.destinationAddresses[0];
+                    if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+
+                        $('#result').html("Better get on a plane. There are no roads between " + origin + " and " + destination);
+                    } else {
+
+
+                        var distance = response.rows[0].elements[0].distance;
+                        var duration = response.rows[0].elements[0].duration;
+                        console.log(response.rows[0].elements[0].distance);
+                        console.log(response.rows[0].elements[0].duration);
+                        var distance_in_kilo = distance.value / 1000; // the kilom
+                        distance_in_mile = distance.value / 1609.34; // the mile
+
+                        var duration_text = duration.text;
+                        console.log(duration_text);
+                        var duration_value = duration.value;
+                        console.log(duration_value);
+
+                        $('#in_mile').html(distance_in_mile.toFixed(0) + '&nbsp;Miles');
+                        $('#inMiles').val(distance_in_mile.toFixed(0));
+                        $('#inmile').text(distance_in_mile.toFixed(0));
+
+                        $('#in_kilo').text(distance_in_kilo.toFixed(0));
+                        $('#duration_text').html('Duration:&nbsp;' + duration_text);
+                        $('#duration_value').text(duration_value);
+                        $('#from').text(origin);
+                        $('#to').text(destination);
+
+
+                        var m = distance_in_mile.toFixed(0);
+                        //var mile = parseInt(m);
+                        $('.fa-spin').show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/getPrice',
+                            data: { 'value': m, cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+                                $('#Price').css('display', 'block');
+                             
+                                $('#Prices').html(data.totalAmount);
+                                $("#price").val(data.totalAmount);
+                                console.log("your data submited successfull ");
+                            },
+                            error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                            },
+
+                            complete: function () {
+                                $('.fa-spin').hide();
+                            }
+                        });
+
+                        return false;
+
+                    }
+                }
+            }
+            // print results on submit the form
+
+            //$('#distanceform').submit(function (e) {
+            //   e.preventDefault();
+
+
+
+        //    });
+            // submitted form
+
+
+            var way
+            $('#slectoption').on('change', function () {
+
+                way = $(this);
+
+                if (way.val() == 'return') {
+                    $('#returndiv').show();
+                    $('#datepicker2,#timepicker2').prop('required', true);
+                }
+                else {
+                    $('#returndiv').hide();
+                    $('#datepicker2,#timepicker2').prop('required', false);
+                }
+            });
+
+
+            var hour;
+            $('#hours').on('change', function () {
+
+                hour = $(this);
+
+            });
+
+            var cartype;
+            $('#cartype').on('change', function () {
+
+                cartype = $(this);
+                var car = $(this).children(":selected").val();
+
+                if (cartype == '') {
+
+                    $('.errormsg').html('please select the car type');
+
+                    cartype = undefined;
+                    return false;
+                }
+                else {
+                    $('.errormsg').html('');
+
+                    $("#selectedcar").val(car);
+                }
+
+                console.log(car);
+
+
+               // console.log($("#cartype").val(car))
+
+
+
+            });
+
+            var picUpPostCode;
+            $('#PostCodeSelect2').on('change', function () {
+
+                picUpPostCode = $(this);
+
+                var postcodetext1 = $('#PostCodeSelect2 :selected').text();
+
+                $('#postcode_1').val(postcodetext1);
+            });
+
+            var dropOffPostCode;
+            $('#PostCode2Select2').on('change', function () {
+
+                dropOffPostCode = $(this);
+                var postcodetext2 = $('#PostCode2Select2 :selected').text();
+
+                $('#postcode_2').val(postcodetext2);
+
+            });
+
+            
+
+            $('#GetQuote').click(function (e) {
+
+
+                if ($('.distance').hasClass("active")) {
+                
+                    $('#jobType').val('Distance');
+                    $("#hourError").html('');
+                    console.log("getting price by distance");
+                    if ($('#from_places').val() == '') {
+                        $('#inputError1').html('Please enter your pick up address');
+
+                        return false;
+                    }
+                    else if ($('#to_places').val() == '') {
+                        $('#inputError2').html('Please enter your drop off address');
+
+                        return false;
+                    }
+
+                    else if (cartype == undefined) {
+                        $('.errormsg').html('please select the car type');
+                        return false;
+                    }
+                    else if (way == 'return') {
+                        $('#datepicker2,#timepicker2').prop('required', true)
+                    }
+
+                    else {
+                        $('.errormsg').html('');
+                        $('#inputError1').html('');
+                        $('#inputError2').html('');
+                        $('#datepicker,#timepicker').prop('required', true);
+
+
+                        e.preventDefault();
+                        calculateDistance();
+                        $('#GetQuote').hide();
+
+                      //  $('#BookNow').show();
+                        $('#DriverMsg').show();
+                        $('#from_places,#to_places,#cartype').attr('disabled', 'disabled');
+
+
+
+                    }
+
+
+                }// ditance if end
+                else if ($('.hourly').hasClass("active")) {
+                  
+                    $('#jobType').val('Hourly');
+                    console.log("getting price by hourly");
+
+                       if ($('#from_places').val() == '') {
+                        $('#inputError1').html('Please enter your pick up address');
+
+                        return false;
+                       }
+                       else if (hour == null) {
+
+                        $("#hourError").html('please select  the hours');
+
+
+                        return false;
+
+                       }
+                        else if (cartype == undefined) {
+                        $('.errormsg').html('please select the car type');
+                        return false;
+                       }
+
+                       else {
+                       
+                          $('.errormsg,#hourError').html('');
+                          $('#inputError1').html('');
+                          $('#inputError2').html('');
+                          $('#postcodeError,#postcodeError2').html('');
+
+                           $('#GetQuote').hide();
+                          // $('#BookNow').show();
+                           $('#DriverMsg').show();
+                           $('#datepicker,#timepicker').prop('required', true);
+                           $('#hours,#cartype').attr('disabled', 'disabled');
+
+                           $('.fa-spin').show();
+                           $.ajax({
+                            type: "POST",
+                            url: '/Home/getPriceByhHours',
+                            data: { 'value': $('#hours').val(), cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+                               
+                                $('#Price').css('display', 'block');
+
+                                $('#Prices').html(data.totalAmount);
+                                $("#price").val(data.totalAmount);
+                               // $("#price").val(data.totalAmount);
+                                console.log("your data submited successfull ");
+                             },
+                               error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                             },
+
+                             complete: function () {
+                                 $('.fa-spin').hide();
+                             }
+                            });
+
+                       
+                       
+                    }
+
+
+                }// hourly else if end
+                else if ($('.flateRate').hasClass("active")) {
+                  
+                      $('#jobType').val('FlateRate ');
+                      console.log("getting price by Flate");
+                      $("#hourError").html('');
+
+   
+                      if (picUpPostCode == null) {
+
+                        $('#postcodeError').html('please select pick up post code');
+                      }
+                      else if (dropOffPostCode == null) {
+                        $('#postcodeError2').html('please select  drop off post code');
+                       }
+                       else if (cartype == undefined) {
+                        $('.errormsg').html('please select the car type');
+                        return false;
+                      }
+                      else if (way == 'return') {
+                        $('#datepicker2,#timepicker2').prop('required', true)
+                      }
+
+                       else {
+                        $('.errormsg,#hourError').html('');
+                        $('#inputError1').html('');
+                        $('#inputError2').html('');
+                        $('#postcodeError,#postcodeError2').html('');
+                        $('#datepicker,#timepicker').prop('required', true);
+                          $('#PostCodeSelect2,#PostCode2Select2').attr('disabled', 'disabled');
+                          $('#hours,#cartype').attr('disabled', 'disabled');
+                        $('#GetQuote').hide();
+
+                     //   $('#BookNow').show();
+                        $('#DriverMsg').show();
+                        $('.fa-spin').show();
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/getPriceByFlateRate',
+                            data: { 'postcode1': $('#PostCodeSelect2').val(), 'postcode2': $('#PostCode2Select2').val(), cartype: $('#cartype').val() },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (data) {
+                                // $('#textAmount').val(data.doubleValue);
+                                console.log(data.totalAmount);
+
+                                $('#Price').css('display', 'block');
+                                if (data.totalAmount == 0) {
+                                    $("#Prices").html('?.  Call on 079 7387 3598 for discounted price on this journey');
+                                    err = 1;
+                                    return false;
+                                }
+
+                                else {
+                                    err = 0;
+                                    $('#Prices').html(data.totalAmount);
+                                    $("#price").val(data.totalAmount);
+                                    
+                                }
+
+                               
+                               
+                             
+                                console.log("your data submited successfull ");
+                            },
+                            error: function () {
+
+                                console.log('error occure when you sending ajax request');
+                            },
+
+                            complete: function () {
+                                $('.fa-spin').hide();
+                            }
+                        });
+                    }
+
+                }// flate Rate else if end
+
+                else {
+                   
+                }// end else condition of fetQuote
+
+                var sessionId = @UserSessionId;
+
+                    if (sessionId == 0) {
+                     //   $("#BookNow").hide();
+                        $("#LoginPopShow").show();
+                        $("#LoginPopShow").fancybox();
+
+                        $("#msg").hide();
+
+                        Login = function () {
+                            // var data = $("#loginForm").serialize();
+                            $.ajax({
+                                type: "post",
+                                url: "/Home/CheckValidUser",
+                                data: { email: $('#logEmail').val(), password: $('#logPssword').val() },
+                                success: function (Data) {
+                                    if (Data.result == "Fail") {
+                                        $("#loginForm")[0].reset();
+                                        $("#msg").show();
+                                    }
+
+                                    else {
+                                        //window.location.href = "/Register/AfterLogin";
+                                        sessionId = Data.sessionId;
+                                        console.log("login sccessfull");
+                                        $("#msg").hide();
+                                        $("#LoginPopShow").hide();
+                                        $.fancybox.close();
+                                        $("#passengerId").val(sessionId);
+                                        $("#BookNow").show();
+                                         console.log(sessionId);
+                                    }
+                                },
+                                error: function () {
+                                    console.log('login request creating problem problem');
+
+
+                                }
+
+
+                            })
+                        }
+                       // return false;
+                    } // for checking sessio id
+                    else {
+                       
+                            $("#passengerId").val(sessionId);
+                            $("#BookNow").show();
+                        
+                        
+                    }
+              
+            });
+
+
+        });
+    </script>
+
+    @* //for get price and mile using google map*@
+
+
+
+
+    <script type="text/javascript">
+
+        $('.dhf,#refreshForm2').on('click', function () {
+            $('#formMain2').find("input,select").not("input[type=button],#datepicker,.timepicker,#BookNow,#LoginPopShow").val('');
+            
+            $('#in_mile,#duration_text,#Prices').html('');
+            $('#Price').css('display', 'none');
+            $('#GetQuote').show();
+            $('#BookNow').hide();
+            $('#DriverMsg').hide();
+            $('#from_places,#to_places,#cartype,#hours,#PostCodeSelect2,#PostCode2Select2').attr('disabled', false);
+            $('#BookNow').hide();
+            $("#LoginPopShow").hide();
+
+            $("#PostCodeSelect2").select2({
+                placeholder: "Select a Pick Up Postcode",
+                allowClear: true
+
+            });
+            $("#PostCode2Select2 ").select2({
+                placeholder: "Select Drop Off Postcode",
+                allowClear: true
+
+            });
+
+
+
+        });
+
+    </script>
+
+   
+    <script src="~/js/jquery-ui.js"></script>
+
+    <!-- Time -->
+    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
+    <script type="text/javascript">
+
+        $('.timepicker,.timepicker2').wickedpicker({
+            twentyFour: false,
+
+        });
+        var timepicker = $('.timepicker').wickedpicker();
+       
+        var getCurrentTime = timepicker.wickedpicker('time');
+        $('.timepicker').val(getCurrentTime);
+       
+    </script>
+    <!-- Time -->
+    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
+    <script type="text/javascript">
+
+        $('.timepicker,.timepicker2').wickedpicker({
+            twentyFour: false,
+
+        });
+        var timepicker = $('.timepicker').wickedpicker();
+       
+        var getCurrentTime = timepicker.wickedpicker('time');
+        $('.timepicker').val(getCurrentTime);
+       
+    </script>
+    <!--// Time -->
+    <script>
+            $(function () {
+                $("#datepicker").datepicker().datepicker("setDate", new Date());
+
+               $('.ui-datepicker').hide();
+              
+        });
+
+        </script>
+
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
+            
+        });
+    </script>
+    <!-- //Calendar -->
+    <!-- //carousel -->
+    <!--slider-->
+
+  
+  
+   
+
+    @*booking form fields show and hide*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#PostCode2Select2 ,#PostCodeSelect2').select2({
+
+               
+            });
+           
+
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+
+            $('.hourly').click(function () {
+                $('#HourMain').show();
+                $('#mainDirection').hide();
+                $('#flateRates').hide();
+                $('.pick').show();
+                $('.Drop').hide();
+                //$('#slectoption').val('oneWay');
+                $('#slectoption').val('oneWay');
+
+                $('#returndiv').hide();
+            });
+            $('.distance').click(function () {
+
+                $('#HourMain').hide();
+                $('#mainDirection').show();
+                $('#flateRates').hide();
+                $('.pick').show();
+                $('.Drop').show();
+            });
+
+            $('.flateRate').click(function () {
+                $('#HourMain').hide();
+                $('#mainDirection').show();
+                $('#flateRates').show();
+                $('.pick').hide();
+                $('.Drop').hide();
+            })
+
+        });
+    </script>
+
+    <script>
+
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("formHead");
+        var btns = header.getElementsByClassName("dhf");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+
+                var current = document.getElementsByClassName("active");
+
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+                //console.log(current[0]);
+
+            });
+        }
+
+    </script>
+
+}

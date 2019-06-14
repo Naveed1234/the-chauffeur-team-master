@@ -1,0 +1,40 @@
+﻿body {
+}
+
+.fixed_header3 {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+
+
+    .fixed_header3 tbody {
+        display: block;
+        overflow: auto;
+    }
+
+
+
+
+    .fixed_header3 thead tr {
+        display: block;
+    }
+
+    .fixed_header3 thead {
+        background-color: blue;
+        color: #fff;
+    }
+
+    .fixed_header3 th {
+        padding: 100px;
+        margin-left:10%;
+        text-align: match-parent;
+        width: 100px;
+    }
+
+    .fixed_header3 td {
+        padding: 2px;
+        width: 135px;
+        text-align: left;
+    }

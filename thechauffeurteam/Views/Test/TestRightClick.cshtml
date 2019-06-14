@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "TestRightClick";
+}
+
+<h2>TestRightClick</h2>
+
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+        .btnEdit {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-hover table-bordered" id="tblData">
+        <thead>
+            <tr class='abc'>
+                <th>Parameter Names</th>
+                <th>Parameter Values</th>
+                <th>Remarks</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id='John1' class='abc'>
+                <!-- id=username+userid -->
+                <td>johnrambo@mail.com</td>
+                <td>John</td>
+                <td>Rambo</td>
+                <td>
+                    <a class="btn btn-mini btnEdit" href='asd.html'>Edit</a>
+                </td>
+
+            </tr>
+            <tr id='Peter1' class='abc'>
+                <td>peterparker@mail.com</td>
+                <td>Peter</td>
+                <td>Parker</td>
+                <td>
+                    <a class="btn btn-mini btnEdit" id="btnEdit" href='asd.html'>Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.abc').contextmenu(function () {
+            $('.btnEdit').hide();
+            var id = $(this).attr('id');
+            $('#' + id + ' .btnEdit').toggle();
+            return false;
+        });
+        $(document).click(function () {
+            $('.btnEdit').hide();
+        });
+    });
+</script>

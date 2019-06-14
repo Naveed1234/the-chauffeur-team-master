@@ -1,0 +1,198 @@
+﻿@model thechauffeurteam.Models.DistancePrice
+
+@{
+    ViewBag.Title = "PriceTable";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+
+        </div>
+    </div>
+</div>
+<!-- Editable table -->
+
+<div class="container-fluid mt--7">
+    <div class="row mt-5">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Distance Price Value</h3>
+                        </div>
+                        <div class="col text-right">
+                            @*<a href="#!" class="btn btn-sm btn-primary">See all</a>*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body thead-light">
+
+                    @*<<<<<<<<*@
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row justify-content-center">
+
+                            <div class="col-md-9">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>Milage Range</b></label>
+                                            <div class="col-sm-12">
+                                                <label class="form-control" type="text" value="@Model.MileFrom">@Model.MileFrom</label>
+                                                <input type="hidden" id="MileFrom" name="MileFrom" value="@Model.MileFrom" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @if (@Model.MileTo.Equals(100000))
+                                                {
+                                                <label class="form-control" type="text" value="@Model.MileTo">...</label>
+                                                }
+                                                else
+                                                {
+                                                <label class="form-control" type="text" value="@Model.MileTo">@Model.MileTo</label>
+
+                                                }
+                                                <input type="hidden" id="MileTo" name="MileTo" value="@Model.MileTo" />
+
+
+                                                @*<select id="MileTo" name="MileTo" class="form-control">
+                            @for (int i = 0; i < MileToVal.Length; i++)
+                            {
+                                if (@MileToVal[i] != 0)
+                                {
+                                    <option value="@MileToVal[i]">@MileToVal[i]</option>
+                                }
+                                else
+                                {
+                                    <option value="0">...</option>
+                                }
+
+
+                            }
+
+                        </select>*@
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>Saloon</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.EclassFirstMile, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Class 1st Mile" } })
+                                                @Html.ValidationMessageFor(model => model.EclassFirstMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.EclassPerMile, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Class per Mile" } })
+                                                @Html.ValidationMessageFor(model => model.EclassPerMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>Estate</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.SclassFirstMile, new { htmlAttributes = new { @class = "form-control", placeholder = "S-Class 1st Mile" } })
+                                                @Html.ValidationMessageFor(model => model.SclassFirstMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.SclassPerMile, new { htmlAttributes = new { @class = "form-control", placeholder = "S-Class per Mile" } })
+                                                @Html.ValidationMessageFor(model => model.SclassPerMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>MPV</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.VclassFirstMile, new { htmlAttributes = new { @class = "form-control", placeholder = "V-Class 1st Mile" } })
+                                                @Html.ValidationMessageFor(model => model.VclassFirstMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12" for="address"><b>&nbsp;</b></label>
+                                            <div class="col-sm-12">
+                                                @Html.EditorFor(model => model.VclassPerMile, new { htmlAttributes = new { @class = "form-control", placeholder = "V-Class per Mile" } })
+                                                @Html.ValidationMessageFor(model => model.VclassPerMile, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <br>
+                        <div class="row justify-content-center">
+                            <button class="col-md-1 btn btn-primary" type="submit"> SAVE</button>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+

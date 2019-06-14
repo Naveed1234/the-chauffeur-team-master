@@ -1,0 +1,170 @@
+﻿@model thechauffeurteam.Models.job
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.passenger.UserFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passenger.UserFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateAndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateAndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pickUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pickUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PdoorNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PdoorNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DropUP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DropUP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DdoorNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DdoorNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attribute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attribute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

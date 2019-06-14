@@ -1,0 +1,383 @@
+﻿@model IEnumerable<thechauffeurteam.Models.job>
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_DriverLayout.cshtml";
+}
+
+<head>
+    <style>
+
+        /*datepicker styling*/
+
+        .ui-datepicker {
+            background-color: #fff;
+            border: 1px solid #66AFE9;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(102,175,233,.6);
+            display: none;
+            margin-top: 4px;
+            padding: 10px;
+            width: 240px;
+        }
+
+            .ui-datepicker a,
+            .ui-datepicker a:hover {
+                text-decoration: none;
+            }
+
+                .ui-datepicker a:hover,
+                .ui-datepicker td:hover a {
+                    color: #2A6496;
+                    -webkit-transition: color 0.1s ease-in-out;
+                    -moz-transition: color 0.1s ease-in-out;
+                    -o-transition: color 0.1s ease-in-out;
+                    transition: color 0.1s ease-in-out;
+                }
+
+            .ui-datepicker .ui-datepicker-header {
+                margin-bottom: 4px;
+                text-align: center;
+            }
+
+            .ui-datepicker .ui-datepicker-title {
+                font-weight: 700;
+            }
+
+            .ui-datepicker .ui-datepicker-prev,
+            .ui-datepicker .ui-datepicker-next {
+                cursor: default;
+                font-family: 'Glyphicons Halflings';
+                -webkit-font-smoothing: antialiased;
+                font-style: normal;
+                font-weight: normal;
+                height: 20px;
+                line-height: 1;
+                margin-top: 2px;
+                width: 30px;
+            }
+
+            .ui-datepicker .ui-datepicker-prev {
+                float: left;
+                text-align: left;
+            }
+
+            .ui-datepicker .ui-datepicker-next {
+                float: right;
+                text-align: right;
+            }
+
+            .ui-datepicker .ui-datepicker-prev:before {
+                content: "\e079";
+            }
+
+            .ui-datepicker .ui-datepicker-next:before {
+                content: "\e080";
+            }
+
+            .ui-datepicker .ui-icon {
+                display: none;
+            }
+
+            .ui-datepicker .ui-datepicker-calendar {
+                table-layout: fixed;
+                width: 100%;
+            }
+
+                .ui-datepicker .ui-datepicker-calendar th,
+                .ui-datepicker .ui-datepicker-calendar td {
+                    text-align: center;
+                    padding: 4px 0;
+                }
+
+                .ui-datepicker .ui-datepicker-calendar td {
+                    border-radius: 4px;
+                    -webkit-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    -moz-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    -o-transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                    transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+                }
+
+                    .ui-datepicker .ui-datepicker-calendar td:hover {
+                        background-color: #eee;
+                        cursor: pointer;
+                    }
+
+                    .ui-datepicker .ui-datepicker-calendar td a {
+                        text-decoration: none;
+                    }
+
+            .ui-datepicker .ui-datepicker-current-day {
+                background-color: #4289cc;
+            }
+
+                .ui-datepicker .ui-datepicker-current-day a {
+                    color: #fff
+                }
+
+            .ui-datepicker .ui-datepicker-calendar .ui-datepicker-unselectable:hover {
+                background-color: #fff;
+                cursor: default;
+            }
+
+
+        /*datepicker styling*/
+    </style>
+</head>
+
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-4 pt-md-6 h-100">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid mt--7">
+
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="mb-0">Jobs</h3>
+                        </div>
+                        
+
+                    </div>
+                </div>
+                <div class="table-responsive" style="min-height:400px;max-height:700px">
+                    <table id="jobTable1" class="table align-items-center table-flush">
+                        <thead class="thead-dark">
+                            <tr class="text-light px-1">
+                                @*<th scope="col" class="text-light px-1 ml-0 px-0 text-center">Status</th>*@
+                                <th scope="col" class="text-light px-0 mx-0 text-center">Time</th>
+                                <th scope="col" class="text-light px-0 text-center">Pick Up</th>
+                                <th scope="col" class="text-light px-0 text-center">Drop Off</th>
+                                <th scope="col" class="text-light px-0 text-center">Price</th>
+                                <th scope="col" class="text-light px-0 text-center">Name</th>
+                                <th scope="col" class="text-light px-0 text-center">Passenger Ph#</th>
+                                <th scope="col" class="text-light px-0 text-center">Driver</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="jobTable">
+                            @foreach (var value in Model)
+                            {
+
+
+                                <tr class=" px-1" style="">
+
+                                    <td scope="col" class="py-1 my-0 pr-0 mr-0" style="overflow:hidden;max-width:155px">@value.dateAndTime</td>
+                                    <td scope="col" class="py-1 my-0 ml-0 px-0 " style="overflow:hidden;max-width:250px">@value.pickUp</td>
+                                    <td scope="col" class="py-1 my-0 pr-0 ml-1" style="overflow:hidden;max-width:250px">@value.DropUP</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">£&nbsp; @value.Price</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.PassengerName</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center">@value.PassengerPhone</td>
+                                    <td scope="col" class="py-1 my-0 px-0 text-center drivID">@value.DriverId</td>
+                                 
+                                </tr>
+                            }
+                           
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+       
+    </div>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-12">
+                <div class="copyright text-center text-xl-left text-muted">
+                    &copy; 2018 itLogi Solutions
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+
+
+
+@section scripts{
+    <script src="~/js/jquery-ui.js"></script>
+    <!-- Time -->
+    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
+    <script>
+        $(function () {
+            $("#fromDate").datepicker().datepicker("setDate", new Date());
+            $("#toDate").datepicker().datepicker("setDate", new Date());
+
+            $('.ui-datepicker').hide();
+
+        });
+
+        function myFunction() {
+
+
+            table = document.getElementById("jobTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+
+            input = document.getElementById("driverId");
+            filter = input.value.toUpperCase();
+
+            var startDate = document.getElementById("fromDate").value;
+            var endDate = document.getElementById("toDate").value;
+            table = document.getElementById("jobTable");
+            tr = table.getElementsByTagName("tr");
+            var tdDate, rowDate;
+            var tdPhone, rowPhone;
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[6];
+                tdDate = tr[i].getElementsByTagName("td")[0];
+                tdPhone = tr[i].getElementsByTagName("td")[5];
+
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    rowDate = tdDate.textContent || td.innerText;
+                    rowPhone = tdPhone.textContent || td.innerText;
+
+                    rowDate = rowDate.substring(10).trim();
+                    //alert("date : " + rowDate)
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1 && startDate <= rowDate && rowDate <= endDate) {
+                        tr[i].style.display = "";
+
+                    }
+                    else if (rowPhone.toUpperCase().indexOf(filter) > -1 && startDate <= rowDate && rowDate <= endDate) {
+                        tr[i].style.display = "";
+                    }
+                    else {
+
+                        //tr[i].remove();
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    <script type="text/javascript">
+
+        $("#btnExport").on("click", function () {
+            html2canvas($('#jobTable1')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Jobs.pdf");
+                }
+            });
+        });
+    </script>
+
+
+    @*<script>
+            $(document).ready(function () {
+                $("#driverId").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#jobTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>*@
+
+
+    <script type="text/javascript">
+
+
+
+
+
+
+        function jobInfo(Id) {
+            //alert("success" + Id)
+
+             $.ajax({
+                type: "POST",
+                 url: '@Url.Action("JobInfo", "Admin")',
+                 data: { id: Id },
+                 dataType: "json",
+
+                 success: function (success) {
+
+                         //alert('pick Up :'+success.pickUp);
+                         var txt = $("#jobId").val();
+                         $("#jobId").html(txt + success.jb.id);
+                         $("#jid").val(success.jb.id);
+                         $("#pickUpAddress").val(success.jb.pickUp);
+                         $("#dropOffAddress").val(success.jb.DropUP);
+                         $("#distance").val(success.jb.Mile);
+                         $("#price").val(success.jb.Price);
+                         $("#carType").val(success.jb.CarType);
+
+                         var dAndT = "" + success.jb.dateAndTime;
+
+
+                         $("#time").val(dAndT.substring(0, 10));
+                         $("#date").val(dAndT.substring(11));
+                         $("#driverMessage").val(success.jb.DriverMessage);
+
+                         $("#name").val(success.pass.UserFirstName);
+                         $("#phone").val(success.pass.UserPhNo);
+
+
+
+                         var myOptions = success.drivers;
+                         //var mySelect = ;
+                         var select = $("#drivers");
+                         // alert("length " + success.drivers.length);
+                         $("#drivers").children().remove();
+                         select.append($("<option>").val(0).html("Select Driver"));
+
+                         $(success.drivers).each(function (index, item) {
+                             if (item.DriverId != null) {
+                                 select.append($("<option>").val(item.Id).html(item.DriverId));
+                             }
+                             else {
+                                 select.append($("<option>").val(item.Id).html(item.DriverName));
+                             }
+                         });
+                         console.log(success);
+                 },
+                 error: function (e, text, string) {
+                    alert(e.message + text + string);
+                    console.log(e);
+                 }
+
+            });
+
+        };
+
+    </script>
+
+}

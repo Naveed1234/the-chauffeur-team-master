@@ -1,0 +1,99 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <!--<link href="css/bootstrap.css" rel="stylesheet" />-->
+    <style>
+        table, th, td {
+            border: 2px solid #eee;
+            padding: 10px 15px;
+        }
+
+        table {
+            padding: 20px 30px;
+            background: #fff;
+        }
+
+        h3 {
+            color: blue;
+        }
+        img, h4 {
+            margin-left: 5%;
+        }
+
+        p {
+            margin: 2%;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div style="width:80%; background:#eee;padding:30px;">
+
+      
+
+        <table>
+            <caption>
+                <img src="cid:{mycontentidd}"  />
+
+                <h3> Hello {Drivername} !</h3>
+
+                <h3>A New job  Allocated to You </h3>
+            </caption>
+            <tr>
+                <th>TIME & DATE</th>
+                <td> {TimeAndDate} </td>
+            </tr>
+            <tr>
+                <th>  PICK UP</th>
+                <td> {from}</td>
+            </tr>
+            <tr>
+                <th> DROP OFF</th>
+                <td> {to}</td>
+            </tr>
+            <tr>
+                <th> MILES</th>
+                <td> {Miles}</td>
+            </tr>
+            <tr>
+                <th> PRICE</th>
+                <td> {price}</td>
+            </tr>
+
+            <tr>
+                <th>PASSENGER PHONE</th>
+                <td> {phone}</td>
+            </tr>
+
+            <tr>
+                <th>PASSENGER NAME</th>
+                <td> {name}</td>
+            </tr>
+
+
+        </table>
+
+
+        <p>
+            Regards, <br />
+
+            <b style="color:blue;">   The Chauffeur Team</b>
+        </p>
+
+
+        <!--<img src="data:image;base64,{img}" style="width:150px; height:60px" />
+        <!--<img src="data:image;base64,@Convert.ToBase64String()" style="width:150px;height:60px" />-->
+
+
+    </div>
+
+
+
+</body>
+
+</html>
