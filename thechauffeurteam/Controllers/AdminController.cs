@@ -69,8 +69,9 @@ namespace thechauffeurteam.Controllers
             jb.Message = Message12;
             db.jobs.Add(jb);
             db.SaveChanges();
+            var datalist = db.jobs.ToList();
 
-            return Json(jb, JsonRequestBehavior.AllowGet);
+            return Json(datalist, JsonRequestBehavior.AllowGet);
         }
 
 

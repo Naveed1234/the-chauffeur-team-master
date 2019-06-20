@@ -49,10 +49,22 @@ namespace thechauffeurteam.Controllers
             db.jobs.Add(jb);
             db.SaveChanges();
 
-            var alljob = db.jobs.ToList();
+            //var jb1 = db.jobs.Select(x => new
+            //{
+            //    cName = x.PassengerName,s
+            //    CPNumber = x.PassengerPhone,
+            //    Address = x.pickUp,
+            //    ad1 = x.DropUP
+
+            //}).ToList();
+
 
             //return Json(alljob, JsonRequestBehavior.AllowGet);
-            return new JsonResult { Data = new { alljob = alljob } };
+
+            var jbs = db.jobs.ToList();
+
+            return new JsonResult { Data = new { alljob = jbs } };
+
         }
 
 

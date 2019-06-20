@@ -146,23 +146,26 @@ namespace thechauffeurteam.Controllers
             string postcodeselect1, string postcodeselect11, string From_Places1, int Doornumber1, string To_Places1, int Doorno12,
             string CarType1, string Account1, string Attribute1, string Message12)
         {
-            job jb = new job();
+            
 
-            jb.PassengerName = name1;
-            jb.PassengerPhone = PhoneNo1;
-            jb.dateAndTime = date1 + " " + times1;
-            jb.pickUp = From_Places1;
-            jb.PdoorNumber = Doornumber1;
-            jb.DropUP = To_Places1;
-            jb.DdoorNumber = Doorno12;
-            jb.CarType = CarType1;
-            jb.Price = Account1;
-            jb.Attribute = Attribute1;
-            jb.Message = Message12;
-            db.jobs.Add(jb);
-            db.SaveChanges();
+           
+            var jb = db.jobs.Select(x => new
+            {
+                cName=x.PassengerName,
+                CPNumber = x.PassengerPhone,
+                Address = x.pickUp,
+                ad1 = x.DropUP
+              
+            }).ToList();
 
             return Json(jb, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetData()
+        {
+            var jb = db.jobs.ToList();
+
+            return Json(jb);
         }
 
 
