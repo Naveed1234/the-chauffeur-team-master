@@ -13,7 +13,6 @@
     <link href="~/style/DriverStyle.css" rel="stylesheet" />
 
     <style>
-       
     </style>
     <style>
 
@@ -21,7 +20,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            word-wrap:normal;
+            word-wrap: normal;
             justify-content: center;
             align-items: center;
             height: 38vh;
@@ -31,10 +30,10 @@
         }
 
         .text-box {
-            width:100%;
+            width: 100%;
             /*margin-top:1%;*/
             /*margin-right:5%;*/
-            height: 260px;
+            height: 230px;
             overflow-y: scroll;
             background: #fff;
             box-shadow: 0px 10px 100px rgba(0,0,0,0);
@@ -138,7 +137,7 @@
 
         .bt {
             font-size: 12px;
-            width: 130px;
+            width: 131px;
             text-align: center;
             background-color: blue;
             color: white;
@@ -146,7 +145,7 @@
         }
 
         #formMain2 {
-            width:100%;
+            width: 100%;
             height: 315px;
             background-color: #fff !important;
             border: 5px solid rgba(555,555,555,0.6);
@@ -364,11 +363,9 @@
 </head>
 
 
+<div class="bg-gradient-gray" style="padding:0px">
 
-
-<div class="bg-gradient-gray" style="">
-
-    <div class="row mt-4" style="width:98.5%;margin-left:1%;">
+    <div class="row mt-1" style="width:98.5%;margin-left:1%;">
 
         <div class="col-md-8 driverReg mt-2 ml--2">
             <div class="row justify-content-center">
@@ -393,7 +390,7 @@
                         </div>
                         <div class="formBody p-1">
                             <form method="post" id="distanceform" action="jobBooking/SaveJobAjx">
-                                <div class="d-inline-flex flex-row">
+                                <div class="d-flex d-inline-flex flex-row">
                                     <div class="col-md-4" style="padding:1px !important;">
 
                                         <input type="text" class="form-control" name="PassengerName" placeholder="Passenger Name" id="Pname" />
@@ -431,7 +428,7 @@
                                         <p class="text-danger" id="postcodeError2"></p>
                                     </div>
                                 </div> <!--flate rates-->
-                                <div class="d-inline-flex" style="padding:0px;margin-top:1% !important">
+                                <div class="d-flex d-inline-flex flex-row" style="padding:0px;margin-top:1% !important">
                                     <div class="col-md-4" style="padding:1px; margin:0px !important;">
 
                                         <div class="" style="padding:1px !important;">
@@ -505,7 +502,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-inline-flex flex-row mt--2" style="width:100% !important;">
+                                <div class="d-flex d-inline-flex flex-row mt--2" style="width:100% !important;">
                                     <div class="col-md-4" style="padding:1px !important;width:100%">
 
                                         @*<input type="text" class="form-control" name="" placeholder="Check grid" />*@
@@ -526,8 +523,6 @@
                                             <option value="return">Account</option>
                                         </select>
                                     </div>
-
-
 
                                     @*<div class="col-md-3">
                                             <div class="form-group" id="mainDirection">
@@ -557,14 +552,14 @@
 
 
 
-                                <div class="col-md-12 d-inline-flex flex-row mt--2" style="padding:0px !important">
+                                <div class="col-md-12 d-flex d-inline-flex flex-row mt--2" style="padding:0px !important">
 
 
                                     <div class="col-md-4" style="padding:0px">
                                         <input type="text" rows="5" name="message" class="form-control" placeholder="Any Message for Driver" id="message" style="width:100%" />
                                     </div>
                                     @*<h3 class="mt-2 pl-2">Mile</h3>*@
-                                    <div class="col-md-2 d-inline-flex justify-content-center" style="height:45px;width:100%;padding:0px">
+                                    <div class="col-md-2 d-inline-flex justify-content-center" style="height:40px;width:100%;padding:0px">
 
                                         <h4 class="mt-2"> Mile:</h4>
                                         <p class="badge pp" id="in_mile" name="in_mile" style="font-size:12px;border:2px solid #f0f0d0;padding:0px;width:100%;margin:0px;text-align:center !important"> </p>
@@ -595,16 +590,7 @@
                                         <i class="fa fa-spinner fa-spin" style="display:none;"></i>
                                     </div>
 
-
-
                                 </div>
-
-
-
-
-
-
-
 
                                 @*<div id="returndiv" style="display:none;">
                                         <label class="returnDateTime">Return Date & Time</label><br />
@@ -620,9 +606,10 @@
 
 
                                 <div class="d-flex flex-row mt-2">
-                                    <div class="d-flex d-inline-flex flex-wrap">
+                                    <div class=" d-inline-flex flex-wrap">
                                         &nbsp;
-                                        <button type="button" class="btn  ml--2 bt" value="Save" id="saveAjax">Save</button>
+          
+                                        <button type="button" class="btn  ml--1 bt" value="Save" id="saveAjax">Save</button>
                                         @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
                                         <input type="button" class="btn  ml-1 bt" value="Save & Return" id="SaveAndReturn" />
 
@@ -693,7 +680,7 @@
         </div>
 
 
-        <div class="col-2 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%">
+        <div class="col-lg-2 col-md-6 col-sm-6 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
             <h4 style="text-align:center; background-color:blue;color:white">Driver onBoard</h4>
             <table class="table-hover " id="dritble">
                 <thead>
@@ -787,7 +774,7 @@
             </table>
         </div>
 
-        <div class="col-2 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
+        <div class="col-lg-2 col-md-6 col-sm-6 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
             <h4 style="text-align:center; background-color:blue;color:white">Driver on waiting</h4>
             <table class="table-hover " id="dritble">
                 <thead>
@@ -884,58 +871,58 @@
 
     </div><!--row-->
     @*<div class="bg-gradient" style="" id="body">*@
-        <div class="row mt-1 ml-1"style="width:99.2%;margin:0%">
-            <div class="text-box" style="width:100%">
-                <table class="table-hover" cellpadding="5" style="width:100%" id="ajaxTable">
-                    <thead id="">
-                        <tr>
-                            <th>JobId</th>
-                            <th>Time/Date</th>
-                            <th>PickUp</th>
-                            <th>DropOff</th>
-                            <th>Price</th>
-                            <th>Via</th>
+    <div class="row mt-1" style="width:99.3%;margin-left:0.2% !important">
+        <div class="text-box" style="width:100%">
+            <table class="table-hover" cellpadding="5" style="width:100%" id="ajaxTable">
+                <thead id="">
+                    <tr>
+                        <th>JobId</th>
+                        <th>Time/Date</th>
+                        <th>PickUp</th>
+                        <th>DropOff</th>
+                        <th>Price</th>
+                        <th>Via</th>
 
-                            <th>vehicle</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>JobType</th>
-                            <th>AC.No</th>
+                        <th>vehicle</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>JobType</th>
+                        <th>AC.No</th>
 
-                        </tr>
-                    </thead>
-                    <tbody style=" height:140px!important;">
+                    </tr>
+                </thead>
+                <tbody style=" height:140px!important;">
 
-                        @*@foreach (var value in Model)
-                    {
-                        <tr>
-                            <td style="width:100px">@value.id</td>
-                            <td id="">@value.dateAndTime</td>
-                            <td id="td">@value.pickUp</td>
-                            <td id="td">@value.DropUP</td>
+                    @*@foreach (var value in Model)
+                        {
+                            <tr>
+                                <td style="width:100px">@value.id</td>
+                                <td id="">@value.dateAndTime</td>
+                                <td id="td">@value.pickUp</td>
+                                <td id="td">@value.DropUP</td>
 
-                            <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
-                            <td id="td">Multan</td>
-                            <td>@value.CarType</td>
-                            <td>@value.PassengerName</td>
-                            <td>@value.PassengerPhone</td>
-                            <td>@value.JobType</td>
-                            <td id="td">43502-5421-eff-255</td>
+                                <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
+                                <td id="td">Multan</td>
+                                <td>@value.CarType</td>
+                                <td>@value.PassengerName</td>
+                                <td>@value.PassengerPhone</td>
+                                <td>@value.JobType</td>
+                                <td id="td">43502-5421-eff-255</td>
 
-                        </tr>
+                            </tr>
 
-                    }*@
+                        }*@
 
 
-                    </tbody>
+                </tbody>
 
-                </table>
-            </div>
+            </table>
         </div>
     </div>
+</div>
 @*</div>*@
 
-    
+
 
 
 
@@ -1055,7 +1042,7 @@
                     var from_address = from_place.formatted_address;
                     $('#origin').val(from_address);
 
-                     
+
                 }
                 function toPlacesfunc() {
                     var to_place = to_places.getPlace();
@@ -1668,7 +1655,7 @@
 
 
 
-   
+
     <script>
          //Book Job using Ajax
         $(document).ready(function() {
@@ -1725,7 +1712,7 @@
                     dataType: "json",
 
                     success: function (data) {
-                       
+
                         debugger
                     //    $("#imgLoading").hide();
                         var items = '';
@@ -1754,18 +1741,18 @@
                 return false;
             });
 
-                  
+
                 });
-       
-           
 
 
 
 
-       
+
+
+
     </script>
 
-   
+
     <script>
          //Save And Retuen Job
         $(document).ready(function() {
@@ -1848,7 +1835,7 @@
                     }
                 });
             });
-            
+
 
 
 
