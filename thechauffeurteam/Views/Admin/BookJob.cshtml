@@ -137,7 +137,7 @@
 
         .bt {
             font-size: 12px;
-            width: 131px;
+            width: 134px;
             text-align: center;
             background-color: blue;
             color: white;
@@ -605,19 +605,19 @@
                                     </div>*@
 
 
-                                <div class="d-flex flex-row mt-2">
-                                    <div class=" d-inline-flex flex-wrap">
-                                        &nbsp;
-          
-                                        <button type="button" class="btn  ml--1 bt" value="Save" id="saveAjax">Save</button>
-                                        @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
-                                        <input type="button" class="btn  ml-1 bt" value="Save & Return" id="SaveAndReturn" />
+                                <div class="row mt-1">
 
-                                        <input type="button" class="btn  ml-1 bt" value="Save & Dispatch" id="" />
-                                        <input type="button" class="btn  ml-1 bt" value="Save & Repeat" id="" />
-                                        <input type="button" class="btn  bt" value=" Show Map" id="" />
-                                        @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
-                                    </div>
+                                    &nbsp;
+
+                                    <button type="button" class="btn  ml-2 bt" value="Save" id="saveAjax">Save</button>
+                                    @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
+                                    <input type="button" class="btn  ml-1 bt" value="Save & Return" id="SaveAndReturn" />
+
+                                    <input type="button" class="btn  ml-1 bt" value="Save & Dispatch" id="" />
+                                    <input type="button" class="btn  ml-1 bt" value="Save & Repeat" id="" />
+                                    <input type="button" class="btn  bt" value=" Show Map" id="" />
+                                    @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
+
                                 </div>
 
                                 @*<div class="row">
@@ -881,7 +881,7 @@
                         <th>PickUp</th>
                         <th>DropOff</th>
                         <th>Price</th>
-                        <th>Via</th>
+                        @*<th>Via</th>*@
 
                         <th>vehicle</th>
                         <th>Name</th>
@@ -891,27 +891,27 @@
 
                     </tr>
                 </thead>
-                <tbody style=" height:140px!important;">
+                <tbody class="tbody" style=" height:140px!important;">
 
                     @*@foreach (var value in Model)
-                        {
-                            <tr>
-                                <td style="width:100px">@value.id</td>
-                                <td id="">@value.dateAndTime</td>
-                                <td id="td">@value.pickUp</td>
-                                <td id="td">@value.DropUP</td>
+        {
+            <tr>
+                <td style="width:100px">@value.id</td>
+                <td id="">@value.dateAndTime</td>
+                <td id="td">@value.pickUp</td>
+                <td id="td">@value.DropUP</td>
 
-                                <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
-                                <td id="td">Multan</td>
-                                <td>@value.CarType</td>
-                                <td>@value.PassengerName</td>
-                                <td>@value.PassengerPhone</td>
-                                <td>@value.JobType</td>
-                                <td id="td">43502-5421-eff-255</td>
+                <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
+                <td id="td">Multan</td>
+                <td>@value.CarType</td>
+                <td>@value.PassengerName</td>
+                <td>@value.PassengerPhone</td>
+                <td>@value.JobType</td>
+                <td id="td">43502-5421-eff-255</td>
 
-                            </tr>
+            </tr>
 
-                        }*@
+        }*@
 
 
                 </tbody>
@@ -997,8 +997,111 @@
 
     <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&callback=initMap&key=AIzaSyAUeFGwxXtr8M8SD82BbA-6857CVPKUhNo" type="text/javascript"></script>
 
+    <script>
+         //Book Job using Ajax
+        $(document).ready(function () {
+            loadData1();
+            //console.log('Jquery is work correctly');
+            $("#saveAjax").click(function() {
+
+               // alert("ok");
+
+                var pname1 = $("#Pname").val();
+
+                var phones = $("#Phone").val();
+
+                var dates = $("#datepicker").val();
+                var times = $("#timepicker").val();
 
 
+                var From_Places = $("#from_places").val();
+                var Doornumber = $("#doorno").val();
+                var To_Places = $("#to_places").val();
+                var Doorno1 = $("#doorno1").val();
+                var CarType = $("#cartype").val();
+                var Account = $("#amount").val();
+                var Attribute = $("#attribute").val();
+                var Message = $("#message").val();
+
+
+                $.ajax({
+                    type: "POST",
+                    url:"@Url.Action( "SaveJobAjx", "jobBooking")",
+
+                    data: {
+
+                        name1: pname1,
+                        PhoneNo1: phones,
+
+                       date1: dates,
+
+
+                        times1: times,
+                        //postcodeselect1: postcodeselect2,
+                        //postcodeselect11: postcodeselect3,
+
+                        From_Places1: From_Places,
+                        Doornumber1: Doornumber,
+                        To_Places1: To_Places,
+                        Doorno12: Doorno1,
+                        CarType1: CarType,
+                        Account1: Account,
+                        Attribute1: Attribute,
+                        Message12: Message
+                    },
+                    dataType: "json",
+
+                    success: function (data) {
+                        loadData1();
+                        //alert(data);
+                    }
+                });
+                //return false;
+
+                
+            });
+
+
+                });
+
+
+
+    </script>
+    <script>
+        function loadData1() {
+            $.ajax({
+                url: "/jobBooking/LoadData",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '';
+                    $.each(result, function (key, item) {
+                        html += '<tr>';
+                        html += '<td>' + item.id + '</td>';
+                        html += '<td >' + item.dateAndTime + '</td>';
+                        html += '<td >' + item.pickUp + '</td>';
+                        html += '<td >' + item.DropUP + '</td>';
+                        html += '<td>' + item.Price + '</td>';
+                        //html += '<td>' +Multan+ '</td>';
+                        html += '<td>' + item.CarType + '</td>';
+                       
+                        html += '<td>' + item.PassengerName + '</td>';
+                        html += '<td>' + item.PassengerPhone + '</td>';
+                        html += '<td>' + item.JobType+ '</td>';
+                        //html += '<td>' + 12-445-4545- + '</td>';
+
+                         html += '</tr>';
+                    });
+                    $('.tbody').html(html);
+                    debugger
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    </script>
 
 
     <script>
@@ -1009,14 +1112,6 @@
             autocomplete = new google.maps.places.Autocomplete(input);
         }
     </script>
-
-
-
-
-
-
-
-
 
     <script>
         var distance_in_mile
@@ -1651,196 +1746,22 @@
         });
     </script>
 
-
-
-
-
-
-    <script>
-         //Book Job using Ajax
-        $(document).ready(function() {
-            //console.log('Jquery is work correctly');
-            $("#saveAjax").click(function() {
-
-               // alert("ok");
-                //consol.log("Work correctly");
-                var pname1 = $("#Pname").val();
-               // alert(pname1);
-                var phones = $("#Phone").val();
-               // alert(phones);
-                var dates = $("#datepicker").val();
-                var times = $("#timepicker").val();
-                //var postcodeselect2 = $("#PostCodeSelect2").val();
-                //var postcodeselect3 = $("#PostCode2Select3").val();
-
-
-                var From_Places = $("#from_places").val();
-                var Doornumber = $("#doorno").val();
-                var To_Places = $("#to_places").val();
-                var Doorno1 = $("#doorno1").val();
-                var CarType = $("#cartype").val();
-                var Account = $("#amount").val();
-                var Attribute = $("#attribute").val();
-                var Message = $("#message").val();
-
-
-                $.ajax({
-                    type: "POST",
-                    url:"@Url.Action( "SaveJobAjx", "jobBooking")",
-
-                    data: {
-
-                        name1: pname1,
-                        PhoneNo1: phones,
-
-                       date1: dates,
-
-
-                        times1: times,
-                        //postcodeselect1: postcodeselect2,
-                        //postcodeselect11: postcodeselect3,
-
-                        From_Places1: From_Places,
-                        Doornumber1: Doornumber,
-                        To_Places1: To_Places,
-                        Doorno12: Doorno1,
-                        CarType1: CarType,
-                        Account1: Account,
-                        Attribute1: Attribute,
-                        Message12: Message
-                    },
-                    dataType: "json",
-
-                    success: function (data) {
-
-                        debugger
-                    //    $("#imgLoading").hide();
-                        var items = '';
-                       // var rows = '';
-                        //var rows = "<tr>" +
-                        //    "<th align='left' class='EmployeeTableTH'>Employee ID</th><th align='left' class='EmployeeTableTH'>Name</th><th align='left' class='EmployeeTableTH'>Project Name</th><th align='left' class='EmployeeTableTH'>Manager Name</th><th align='left' class='EmployeeTableTH'>City</th>" +
-                        //    "</tr>";
-                        //$('#ajaxTable tbody').append(rows);
-
-                        $.each(data, function (i, item) {
-                            var rows = "<tr>" +
-                                "<td class='EmployeeTableTD'>" + item.PassengerName + "</td>" +
-                                "<td class='EmployeeTableTD'>" + item.PdoorNumber + "</td>" +
-                                "<td class='EmployeeTableTD'>" + item.PassengerPhone + "</td>" +
-                                "<td class='EmployeeTableTD'>" + item.date1 + "</td>" +
-                                "<td class='EmployeeTableTD'>" + item.times1 + "</td>" +
-                                "</tr>";
-                            $('#ajaxTablet body').append(rows);
-                        });
-                    },
-                    error: function (ex) {
-                        var r = jQuery.parseJSON(response.responseText);
-                        alert("Message: " + r.Message);
-                    }
-                });
-                return false;
-            });
-
-
-                });
-
-
-
-
-
-
-
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js">
     </script>
 
 
-    <script>
-         //Save And Retuen Job
-        $(document).ready(function() {
-            //console.log('Jquery is work correctly');
-            $("#SaveAndReturn").click(function() {
-
-               // alert("ok");
-                //consol.log("Work correctly");
-                var pname1 = $("#Pname").val();
-               // alert(pname1);
-                var phones = $("#Phone").val();
-               // alert(phones);
-                var dates = $("#datepicker").val();
-                var times = $("#timepicker").val();
-                //var postcodeselect2 = $("#PostCodeSelect2").val();
-                //var postcodeselect3 = $("#PostCode2Select3").val();
-
-
-                var From_Places = $("#from_places").val();
-                var Doornumber = $("#doorno").val();
-                var To_Places = $("#to_places").val();
-                var Doorno1 = $("#doorno1").val();
-                var CarType = $("#cartype").val();
-                var Account = $("#amount").val();
-                var Attribute = $("#attribute").val();
-                var Message = $("#message").val();
-
-                $("#from_places").html(From_Places);
-                $("#to_places").html(To_Places);
-
-                $.ajax({
-                    type: "POST",
-                    url:"@Url.Action( "SaveJobAjx", "jobBooking")",
-
-                    data: {
-
-                        name1: pname1,
-                        PhoneNo1: phones,
-
-                       date1: dates,
-
-
-                        times1: times,
-                        //postcodeselect1: postcodeselect2,
-                        //postcodeselect11: postcodeselect3,
-
-                        From_Places1: From_Places,
-                        Doornumber1: Doornumber,
-                        To_Places1: To_Places,
-                        Doorno12: Doorno1,
-                        CarType1: CarType,
-                        Account1: Account,
-                        Attribute1: Attribute,
-                        Message12: Message
-                    },
-                    dataType: "json",
-
-                    success: function (data) {
-                        alert("Data is save");
-                        $('#ajaxTable').empty();
-                        $.each(data, function (i, item) {
-                            var rows = "<tr>" + "<td>" + item.pname1 + "</td>" + "<td>" + item.From_Places1 + "</td>" + "<td>" + item.To_Places1 + "</td>" + "<td>" + item.PhoneNo1 + "</td>" + "</tr>";
-                            $('#ajaxTable tbody').append(rows);
-                            debugger
-                        });
-                        //alert("Data is save");
-                        //  alert("success" + success)
-                        console.log("success " + data.Account1);
-
-                    },
-                    error: function () {
-
-                        alert("something wrong !");
-                    },
-                    empty: function () {
-                        $("#Pname").val('');
-                        // alert(pname1);
-                        $("#Phone").val('');
-
-                    }
-                });
-            });
 
 
 
 
-        });
 
-    </script>
+
+
+
+
+
+    @*Get Data from data base*@
+
+
 
 }

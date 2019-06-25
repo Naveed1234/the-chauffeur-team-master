@@ -27,9 +27,19 @@ namespace thechauffeurteam.Controllers
         }
 
 
+        //Get data using Ajx in ront end
+        [HttpGet]
+        public JsonResult LoadData()
+        {
+            var db = new MyContext();
+            var list = db.jobs.OrderByDescending(s=>s.id).ToList();
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
 
         // Test Ajx
-        
+
         public JsonResult SaveJobAjx(string name1, string PhoneNo1,string date1,string From_Places1,int Doornumber1, string To_Places1,
              int Doorno12, string CarType1, string Account1, string Attribute1,string Message12)
         {
@@ -61,10 +71,10 @@ namespace thechauffeurteam.Controllers
 
             //return Json(alljob, JsonRequestBehavior.AllowGet);
 
-            var jbs = db.jobs.ToList();
+            //  var jbs = db.jobs.OrderByDescending(s => s.id).ToList();
 
-            return new JsonResult { Data = new { alljob = jbs } };
-
+            //  return new JsonResult { Data = new { alljob = jbs } };
+            return Json("data added");
         }
 
 

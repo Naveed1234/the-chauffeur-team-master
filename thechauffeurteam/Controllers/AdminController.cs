@@ -757,13 +757,21 @@ namespace thechauffeurteam.Controllers
             return RedirectToAction("login");
         }
 
+        //Get data using Ajx in ront end
+        [HttpGet]
+        public ActionResult LoadData()
+        {
+            var db = new MyContext();
+            var list = db.jobs.Include(j => j.passenger);
 
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult BookJob()
         {
             ViewBag.pickUpPostcode = new SelectList(db.PostCodes.ToList(), "Id", "PostCodeValue");
             ViewBag.dropOffPostcode = new SelectList(db.PostCodes.ToList(), "Id", "PostCodeValue");
-            var data = db.jobs.Include(j => j.passenger);
+            var data = db.jobs.Include(j => j.passenger).OrderByDescending(s=>s.id).ToList();
 
             return View(data);
         }
