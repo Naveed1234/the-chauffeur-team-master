@@ -11,10 +11,12 @@
     <link href="~/css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
     <link href="~/Content/select2.min.css" rel="stylesheet" />
     <link href="~/style/DriverStyle.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
 
     <style>
-    </style>
-    <style>
+        .tbody tr td {
+            width: 50px;
+        }
 
         #body {
             margin: 0;
@@ -137,11 +139,11 @@
 
         .bt {
             font-size: 12px;
-            width: 134px;
+            width: 133px;
             text-align: center;
             background-color: blue;
             color: white;
-            margin-left: 4px;
+            /*margin-left: 2px;*/
         }
 
         #formMain2 {
@@ -365,7 +367,7 @@
 
 <div class="bg-gradient-gray" style="padding:0px">
 
-    <div class="row mt-1" style="width:98.5%;margin-left:1%;">
+    <div class="row mt-1" style="width:98.5%;margin-left:1%">
 
         <div class="col-md-8 driverReg mt-2 ml--2">
             <div class="row justify-content-center">
@@ -552,27 +554,30 @@
 
 
 
-                                <div class="col-md-12 d-flex d-inline-flex flex-row mt--2" style="padding:0px !important">
+                                <div class="d-flex flex-row mt--2" style="padding:0px !important">
 
 
                                     <div class="col-md-4" style="padding:0px">
-                                        <input type="text" rows="5" name="message" class="form-control" placeholder="Any Message for Driver" id="message" style="width:100%" />
+                                        <input type="text" rows="5" name="message" class="form-control" placeholder="Any Message for Driver" id="message" />
                                     </div>
                                     @*<h3 class="mt-2 pl-2">Mile</h3>*@
-                                    <div class="col-md-2 d-inline-flex justify-content-center" style="height:40px;width:100%;padding:0px">
+                                    <div class="col-md-2" style="padding:2px;">
+                                        <div class="" style="height:44px;width:100%;border:2px solid #f0f0d0;padding:0px">
+                                            <h4 class="mt-2 px-1"> Mile:</h4>
+                                            <p class="badge mt-md--4" id="in_mile" name="in_mile" style="font-size:12px;padding:0px;width:100%;margin-top:14px;text-align:center !important"> </p>
+                                            <span style="display:none;margin-top:0px" id="inmile"></span>
+                                            <input type="hidden" name="inMiles" id="inMiles" />
 
-                                        <h4 class="mt-2"> Mile:</h4>
-                                        <p class="badge pp" id="in_mile" name="in_mile" style="font-size:12px;border:2px solid #f0f0d0;padding:0px;width:100%;margin:0px;text-align:center !important"> </p>
-                                        <span style="display:none;" id="inmile"></span>
-                                        <input type="hidden" name="inMiles" id="inMiles" />
 
+                                        </div>
                                     </div>
                                     @*<h3 class="mt-2">Duration</h3>*@
-                                    <div class="col-md-4 d-md-inline-flex justify-content-center" style="height:40px;padding:0px;margin:0px;margin:0px;width:100% !important ">
+                                    <div class="col-md-4" style="padding:2px;">
+                                        <div class="" style="height:44px;border:2px solid #f0f0d0;padding:0px;margin:0px;margin:0px;width:100% !important ">
+                                            <h4 class="mt-2 px-1"> Duration:</h4>
+                                            <p class="badge mt-md--4" id="duration_text" style="width:100%;font-size:13px;margin-top:0px;padding:0px;text-align:center !important">  </p>
 
-
-                                        <h4 class="mt-2"> Duration:</h4>
-                                        <p class="badge" id="duration_text" style="width:100%;font-size:12px;border:2px solid #f0f0d0;margin:0px;padding:0px;text-align:center !important">  </p>
+                                        </div>
 
                                     </div>
 
@@ -580,14 +585,17 @@
 
                                     @*<div class="col-md-1 mt-2 ml--3">Fare</div>*@
                                     @*<h2 class="mt-1">Fare:&nbsp;</h2>*@
-                                    <div class="col-md-2 d-inline-flex justify-content-center" style="height:40px;width:100%;padding:0px">
-                                        <h4 class=" mt-2">Fare:</h4>
-                                        <p class="" id="Price" style="font-size:12px;border:2px solid #f0f0d0;width:100%;padding:0px;margin:0px!important">
-                                            &nbsp;<i class="fas fa-pound-sign" style="margin-top:10px !important"> &nbsp;<span id="Prices"></span></i>
+                                    <div class=" col-md-2" style="padding:2px !important;">
+                                        <div style="height:44px;width:100% !important;border:2px solid #f0f0d0;">
+                                            <h4 class=" mt-2 px-1">Fare:</h4>
+                                            <p class="" id="Price" style="font-size:12px;width:90% !important;padding:0px!important">
+                                                <i class="fas fa-pound-sign px-1" style="margin-left:40px;margin-top:-24px !important"> &nbsp;<span id="Prices" class="mt--3"></span></i>
 
-                                        </p>
-                                        <input type="hidden" name="price" id="price" />
-                                        <i class="fa fa-spinner fa-spin" style="display:none;"></i>
+                                            </p>
+                                            <input type="hidden" name="price" id="price" />
+                                            <i class="fa fa-spinner fa-spin" style="display:none;"></i>
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -605,18 +613,20 @@
                                     </div>*@
 
 
-                                <div class="row mt-1">
+                                <div class="d-flex flex-row">
 
-                                    &nbsp;
 
-                                    <button type="button" class="btn  ml-2 bt" value="Save" id="saveAjax">Save</button>
-                                    @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
-                                    <input type="button" class="btn  ml-1 bt" value="Save & Return" id="SaveAndReturn" />
+                                    <div class="mt-1">
+                                        <button type="button" class="btn bt" value="Save" id="saveAjax">Save</button>
+                                        @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
+                                        <input type="button" class="btn  bt" value="Save & Return" id="SaveAndReturn" />
 
-                                    <input type="button" class="btn  ml-1 bt" value="Save & Dispatch" id="" />
-                                    <input type="button" class="btn  ml-1 bt" value="Save & Repeat" id="" />
-                                    <input type="button" class="btn  bt" value=" Show Map" id="" />
-                                    @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
+                                        <input type="button" class="btn bt" value="Save & Dispatch" id="" />
+                                        <input type="button" class="btn bt" value="Save & Repeat" id="" />
+                                        <input type="button" class="btn  bt" value=" Show Map" id="" />
+                                        @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
+
+                                    </div>
 
                                 </div>
 
@@ -894,24 +904,24 @@
                 <tbody class="tbody" style=" height:140px!important;">
 
                     @*@foreach (var value in Model)
-        {
-            <tr>
-                <td style="width:100px">@value.id</td>
-                <td id="">@value.dateAndTime</td>
-                <td id="td">@value.pickUp</td>
-                <td id="td">@value.DropUP</td>
+                        {
+                            <tr>
+                                <td style="width:100px">@value.id</td>
+                                <td id="">@value.dateAndTime</td>
+                                <td id="td">@value.pickUp</td>
+                                <td id="td">@value.DropUP</td>
 
-                <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
-                <td id="td">Multan</td>
-                <td>@value.CarType</td>
-                <td>@value.PassengerName</td>
-                <td>@value.PassengerPhone</td>
-                <td>@value.JobType</td>
-                <td id="td">43502-5421-eff-255</td>
+                                <td> <i class="fas fa-pound-sign"></i> @value.Price</td>
+                                <td id="td">Multan</td>
+                                <td>@value.CarType</td>
+                                <td>@value.PassengerName</td>
+                                <td>@value.PassengerPhone</td>
+                                <td>@value.JobType</td>
+                                <td id="td">43502-5421-eff-255</td>
 
-            </tr>
+                            </tr>
 
-        }*@
+                        }*@
 
 
                 </tbody>
@@ -921,15 +931,6 @@
     </div>
 </div>
 @*</div>*@
-
-
-
-
-
-
-
-
-
 
 <!--Right Click Event-->
 @*<div id="contextMenu" class="dropdown clearfix">
@@ -990,13 +991,29 @@
 @section scripts{
 
 
+    <script src="~/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd/mm/yy' });
+
+            $("#datepicker").datepicker().datepicker("setDate", new Date());
+
+            $('.ui-datepicker').hide();
+
+        });
+
+    </script>
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
     <script src="~/Scripts/select2.min.js"></script>
     <script src="~/Scripts/jquery.fancybox.js"></script>
 
     <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&callback=initMap&key=AIzaSyAUeFGwxXtr8M8SD82BbA-6857CVPKUhNo" type="text/javascript"></script>
 
+    <!--Save data using ajax and get -->
     <script>
          //Book Job using Ajax
         $(document).ready(function () {
@@ -1058,7 +1075,7 @@
                 });
                 //return false;
 
-                
+
             });
 
 
@@ -1085,16 +1102,17 @@
                         html += '<td>' + item.Price + '</td>';
                         //html += '<td>' +Multan+ '</td>';
                         html += '<td>' + item.CarType + '</td>';
-                       
+
                         html += '<td>' + item.PassengerName + '</td>';
                         html += '<td>' + item.PassengerPhone + '</td>';
-                        html += '<td>' + item.JobType+ '</td>';
+                        html += '<td>' + item.JobType + '</td>';
                         //html += '<td>' + 12-445-4545- + '</td>';
 
-                         html += '</tr>';
+                        html += '</tr>';
+                        $('.tbody tr td').css('width', '50px');
                     });
                     $('.tbody').html(html);
-                    debugger
+
                 },
                 error: function (errormessage) {
                     alert(errormessage.responseText);
@@ -1614,32 +1632,18 @@
 
 
     <!-- Time -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+    @*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>*@
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <script src="~/js/jquery-ui.js"></script>
-    <script type="text/javascript" src="~/js/wickedpicker.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
 
 
 
-    <script>
-        $(function () {
-            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd/mm/yy' });
+    @*<script>
+            $(function () {
+                $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd-mm-yy' }).val();
 
-            $("#datepicker").datepicker().datepicker("setDate", new Date());
-
-            $('.ui-datepicker').hide();
-
-        });
-
-    </script>
-    <script>
-        $(function () {
-            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-
-        });
-    </script>
+            });
+        </script>*@
     <script type="text/javascript">
 
         $('.timepicker,.timepicker2').wickedpicker({
@@ -1652,11 +1656,7 @@
         $('.timepicker').val(getCurrentTime);
 
     </script>
-    <!-- Time -->
-    <!--// Date Picker -->
-    <!-- //Calendar -->
-    <!-- //carousel -->
-    <!--slider-->
+
     @*booking form fields show and hide*@
     <script type="text/javascript">
         $(document).ready(function () {
@@ -1748,16 +1748,6 @@
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js">
     </script>
-
-
-
-
-
-
-
-
-
-
 
 
     @*Get Data from data base*@
