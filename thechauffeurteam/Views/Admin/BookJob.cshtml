@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<thechauffeurteam.Models.job>
+
+
 @{
     ViewBag.Title = "BookJob";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -13,9 +15,14 @@
     <link href="~/style/DriverStyle.css" rel="stylesheet" />
     <link href="~/Content/datepicker.css" rel="stylesheet" />
 
+
     <style>
-        .tbody tr td {
-            width: 50px;
+        #ajaxTable tr td {
+            max-width: 10px;
+            padding: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #body {
@@ -80,32 +87,32 @@
     </style>
     <style>
         /*#contextMenu {
-            position: absolute;
-            display: none;
-        }
+                  position: absolute;
+                  display: none;
+              }
 
-        .wrap {
-            width: 30%;
-            display: block;
-            margin: 0 auto;
-        }
+              .wrap {
+                  width: 30%;
+                  display: block;
+                  margin: 0 auto;
+              }
 
-        table {
-            border: 2px solid rgba(221, 221, 221, 1);
-        }
+              table {
+                  border: 2px solid rgba(221, 221, 221, 1);
+              }
 
-        tr:nth-child(even) {
-            background: #F5F5F5
-        }
+              tr:nth-child(even) {
+                  background: #F5F5F5
+              }
 
-        tr {
-            position: relative;
-        }
+              tr {
+                  position: relative;
+              }
 
-            tr:hover {
-                background: #c9e8f7;
-                position: relative;
-            }*/
+                  tr:hover {
+                      background: #c9e8f7;
+                      position: relative;
+                  }*/
     </style>
 
     <style>
@@ -137,7 +144,7 @@
             height: 30px;
         }
 
-        .bt {
+        .btn {
             font-size: 12px;
             width: 133px;
             text-align: center;
@@ -617,13 +624,13 @@
 
 
                                     <div class="mt-1">
-                                        <button type="button" class="btn bt" value="Save" id="saveAjax">Save</button>
+                                        <button type="button" class="btn" value="Save" id="saveAjax">Save</button>
                                         @*<input type="submit" class="btn  ml--2 saveAjax" value="Save" id="bt" />*@
-                                        <input type="button" class="btn  bt" value="Save & Return" id="SaveAndReturn" />
+                                        <input type="button" class="btn" value="Save & Return" id="SaveAndReturn" />
 
-                                        <input type="button" class="btn bt" value="Save & Dispatch" id="" />
-                                        <input type="button" class="btn bt" value="Save & Repeat" id="" />
-                                        <input type="button" class="btn  bt" value=" Show Map" id="" />
+                                        <input type="button" class="btn" value="Save & Dispatch" />
+                                        <input type="button" class="btn" value="Save & Repeat" />
+                                        <input type="button" class="btn" value=" Show Map" />
                                         @*<input type="button" class="btn btn-primary" value="Save & Return"/>*@
 
                                     </div>
@@ -690,7 +697,7 @@
         </div>
 
 
-        <div class="col-lg-2 col-md-6 col-sm-6 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
+        <div class="col-lg-2 col-md-6 col-sm-12 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
             <h4 style="text-align:center; background-color:blue;color:white">Driver onBoard</h4>
             <table class="table-hover " id="dritble">
                 <thead>
@@ -700,91 +707,12 @@
                     </tr>
                 </thead>
                 <tbody style="height:250px">
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-6 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
+        <div class="col-lg-2 col-md-6 col-sm-12 fixed_header bg-white mt-2 ml-1" id="" style="border:2px solid #f0f0d0;height:315px;width:100%;padding:0px;margin:0px">
             <h4 style="text-align:center; background-color:blue;color:white">Driver on waiting</h4>
             <table class="table-hover " id="dritble">
                 <thead>
@@ -794,86 +722,7 @@
                     </tr>
                 </thead>
                 <tbody style="height:250px">
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123</td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
@@ -990,22 +839,25 @@
 <!--//login boc-->
 @section scripts{
 
-
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/js/jquery-ui.js"></script>
     <script type="text/javascript" src="~/js/wickedpicker.js"></script>
 
-
     <script>
-        $(function () {
-            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd/mm/yy' });
-
-            $("#datepicker").datepicker().datepicker("setDate", new Date());
-
-            $('.ui-datepicker').hide();
-
-        });
+        $("datepicker").datepicker();
 
     </script>
+    @*<script>
+            $(function () {
+                $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker({ dateFormat: 'dd/mm/yy' });
+
+                $("#datepicker").datepicker().datepicker("setDate", new Date());
+
+                $('.ui-datepicker').hide();
+
+            });
+
+        </script>*@
 
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
     <script src="~/Scripts/select2.min.js"></script>
@@ -1013,11 +865,14 @@
 
     <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&callback=initMap&key=AIzaSyAUeFGwxXtr8M8SD82BbA-6857CVPKUhNo" type="text/javascript"></script>
 
-    <!--Save data using ajax and get -->
+
+    <!--Save jib data using ajax and get -->
     <script>
          //Book Job using Ajax
         $(document).ready(function () {
             loadData1();
+
+
             //console.log('Jquery is work correctly');
             $("#saveAjax").click(function() {
 
@@ -1070,6 +925,7 @@
 
                     success: function (data) {
                         loadData1();
+                        clear();
                         //alert(data);
                     }
                 });
@@ -1084,6 +940,97 @@
 
 
     </script>
+    <!--End Save jib data using ajax and get -->
+    <!--Save and return job -->
+    <script>
+         //Book Job using Ajax
+        $(document).ready(function () {
+            loadData1();
+            //console.log('Jquery is work correctly');
+            $("#SaveAndReturn").click(function() {
+
+               // alert("ok");
+
+                var pname1 = $("#Pname").val();
+
+                var phones = $("#Phone").val();
+
+                var dates = $("#datepicker").val();
+                var times = $("#timepicker").val();
+
+
+                var From_Places = $("#from_places").val();
+                var Doornumber = $("#doorno").val();
+                var To_Places = $("#to_places").val();
+                var Doorno1 = $("#doorno1").val();
+                var CarType = $("#cartype").val();
+                var Account = $("#amount").val();
+                var Attribute = $("#attribute").val();
+                var Message = $("#message").val();
+
+
+                $.ajax({
+                    type: "POST",
+                    url:"@Url.Action( "SaveJobAjx", "jobBooking")",
+
+                    data: {
+
+                        name1: pname1,
+                        PhoneNo1: phones,
+
+                       date1: dates,
+
+
+                        times1: times,
+                        //postcodeselect1: postcodeselect2,
+                        //postcodeselect11: postcodeselect3,
+
+                        From_Places1: From_Places,
+                        Doornumber1: Doornumber,
+                        To_Places1: To_Places,
+                        Doorno12: Doorno1,
+                        CarType1: CarType,
+                        Account1: Account,
+                        Attribute1: Attribute,
+                        Message12: Message
+                    },
+                    dataType: "json",
+
+                    success: function (data) {
+                        putdata();
+                        loadData1();
+                        clear1();
+                       
+                       // clear();
+                        //alert(data);
+                    }
+                });
+                //return false;
+
+
+            });
+
+
+                });
+
+
+
+    </script>
+
+    <!-- Change vlaue -->
+    <script>
+        function putdata() {
+            var From_Places = $("#from_places").val();
+
+            var To_Places = $("#to_places").val();
+
+            $("#from_places").val(To_Places);
+            $("#to_places").val(From_Places);
+
+        }
+    </script>
+
+    <!--Get data from data base -->
     <script>
         function loadData1() {
             $.ajax({
@@ -1095,7 +1042,7 @@
                     var html = '';
                     $.each(result, function (key, item) {
                         html += '<tr>';
-                        html += '<td>' + item.id + '</td>';
+                        html += '<td id="id1">' + item.id + '</td>';
                         html += '<td >' + item.dateAndTime + '</td>';
                         html += '<td >' + item.pickUp + '</td>';
                         html += '<td >' + item.DropUP + '</td>';
@@ -1109,7 +1056,7 @@
                         //html += '<td>' + 12-445-4545- + '</td>';
 
                         html += '</tr>';
-                        $('.tbody tr td').css('width', '50px');
+                        $('html').css("background-color", "yellow");
                     });
                     $('.tbody').html(html);
 
@@ -1662,10 +1609,10 @@
         $(document).ready(function () {
 
 
-            $('#PostCode2Select2 ,#PostCodeSelect2').select2({
+            //$('#PostCode2Select2 ,#PostCodeSelect2').select2({
 
 
-            });
+            //});
 
 
             $("#myBtn").click(function () {
@@ -1746,10 +1693,42 @@
         });
     </script>
 
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js">
+    <!-- do field empty-->
+
+    <script>
+        function clear() {
+            $("#Pname").val("");
+            $("#Phone").val("");
+            $("#datepicker").val("");
+            $("#timepicker").val("");
+            $("#from_places").val("");
+            $("#doorno").val("");
+            $("#to_places").val("");
+            $("#doorno1").val("");
+            $("#cartype").val("");
+            $("#amount").val("");
+            $("#attribute").val("");
+            $("#message").val("");
+        }
     </script>
 
-
+    <!-- do field empty for save and return-->
+    <script>
+        function clear1() {
+            $("#Pname").val("");
+            $("#Phone").val("");
+            $("#datepicker").val("");
+            $("#timepicker").val("");
+            //  $("#from_places").val("");
+            $("#doorno").val("");
+            //  $("#to_places").val("");
+            $("#doorno1").val("");
+            $("#cartype").val("");
+            $("#amount").val("");
+            $("#attribute").val("");
+            $("#message").val("");
+        }
+    </script>
     @*Get Data from data base*@
 
 

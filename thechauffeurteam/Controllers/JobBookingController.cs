@@ -32,22 +32,26 @@ namespace thechauffeurteam.Controllers
         public JsonResult LoadData()
         {
             var db = new MyContext();
-            var list = db.jobs.OrderByDescending(s=>s.id).ToList();
+            var list = db.jobs.OrderBy(s=>s.dateAndTime).ToList();
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
 
+        
+
+
         // Test Ajx
 
-        public JsonResult SaveJobAjx(string name1, string PhoneNo1,string date1,string From_Places1,int Doornumber1, string To_Places1,
+        public JsonResult SaveJobAjx(string name1, string PhoneNo1,string date1, string times1, string From_Places1,int Doornumber1, string To_Places1,
              int Doorno12, string CarType1, string Account1, string Attribute1,string Message12)
         {
             job jb = new job();
 
             jb.PassengerName = name1;
             jb.PassengerPhone = PhoneNo1;
-            jb.dateAndTime = date1;
+            jb.dateAndTime = times1 + " "+date1 ;
+            
             jb.pickUp = From_Places1;
             jb.PdoorNumber = Doornumber1;
             jb.DropUP = To_Places1;
